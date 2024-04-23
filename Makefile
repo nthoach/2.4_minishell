@@ -50,7 +50,7 @@ OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 
 LIBFT	=	./libft/libft.a
 
-HEADERS	=	./headers/builtins.h \
+HEADERS	=	./includes/builtins.h \
 			./includes/color.h \
 			./includes/error.h \
 			./includes/executor.h \
