@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:25 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:55:26 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -51,24 +51,21 @@ int	split_words(char *input, t_split *split)
 
 // splits input, checks errors, expands env,
 // combines quotes, and sorts type
-t_split	*split_input(char *input, t_data *data)
+t_split	*input2split(char *input, t_data *data)
 {
 	t_split	*split;
 
-	split = (t_split *)ft_calloc(1, sizeof(t_split)); //memory allocation
-	if (!split) //fail to allocated
+	split = (t_split *)ft_calloc(1, sizeof(t_split));
+	if (!split)
 	{
 		ft_error(1);
 		return (0);
 	}
-	// make linked list and check error case for input
-	// up to here, word type will be 4 types: PIPE, REDIR, QUOTE, STR 
-	if (!split_words(input, split) || !check_split(split)) // cut down words and add to linked list
+	if (!split_words(input, split) || !check_split(split))
 	{
 		free_split(split);
 		return (0);
 	}
-	//check expansion in STR word and replace expansion accordingly
 	if (!expand_env(split, data) || !combine_quotes(split))
 	{
 		free_split(split);

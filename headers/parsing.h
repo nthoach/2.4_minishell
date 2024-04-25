@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:25:15 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:23 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:15:19 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -79,7 +79,7 @@ void	push_cmd(t_data *data, t_cmds *cmd);
 int		check_input(char *input);
 int		sort_tokens(t_split *split, t_data *data);
 char	**init_args(t_word *start, char *command);
-int		parse_input(t_data *data);
+int		parse_all(t_data *data);
 char	*ft_getenv(char *var, t_data *data);
 t_word	*init_cmd(t_word *ptr, t_cmds *new_cmd);
 char	*expand_err(char *cont, int *i);

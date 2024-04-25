@@ -51,7 +51,7 @@ int	reset_data(t_data *data)
 	t_cmds	*ptr;
 	t_cmds	*del;
 
-	ptr = data->cmds; // to free all data->cmds link list
+	ptr = data->cmds;
 	while (ptr)
 	{
 		del = ptr;
@@ -59,11 +59,11 @@ int	reset_data(t_data *data)
 		free_cmd(del);
 	}
 	if (data->input)
-		free(data->input); // to free the input
+		free(data->input);
 	if (data->pid)
-		free(data->pid); // why do we need to free pid?
+		free(data->pid);
 	data->reset = true;
-	free_double_ptr((void **)data->paths); // why need to free paths
+	free_double_ptr((void **)data->paths);
 	return (1);
 }
 

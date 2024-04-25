@@ -15,8 +15,8 @@ PATHEX = sources/executor/
 PATHINI = sources/init/
 
 sources	=	sources/main.c \
-		sources/init/init_signal.c \
-		sources/init/init_utils.c \
+		sources/init/init_signals.c \
+		sources/init/ini1_data.c \
 		sources/builtins/builtins.c \
 		sources/builtins/m_cd.c \
 		sources/builtins/m_echo.c \
@@ -25,17 +25,17 @@ sources	=	sources/main.c \
 		sources/builtins/m_export.c \
 		sources/builtins/m_pwd.c \
 		sources/builtins/m_unset.c \
-		sources/builtins/utils_builtins.c \
+		sources/builtins/u_builtins.c \
 		sources/builtins/p_builtins.c \
 		sources/utils/parse_envp.c \
-		sources/utils/utils.c \
-		sources/error/error_handling.c \
-		sources/executor/redirection_check.c \
+		sources/utils/ini2_data.c \
+		sources/error/error_all.c \
+		sources/executor/redir_check.c \
 		sources/executor/executor.c \
-		sources/executor/cmds_handler.c \
-		sources/executor/exec_utils.c \
+		sources/executor/single_cmd.c \
+		sources/executor/exec1_utils.c \
 		sources/executor/heredoc.c \
-		sources/executor/executor_utils.c \
+		sources/executor/exec2_utils.c \
 		sources/lexer/input_validation.c \
 		sources/lexer/lexer.c \
 		sources/lexer/lexer_utils.c \
@@ -69,40 +69,45 @@ READLINE_LIB = -L $(READLINE_DIR)/lib -L$(LIBFTP) -lft -lreadline -lhistory
 INCLUDES = -I./headers -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 
 all: $(PATHO) $(NAME)
+	@echo "\n"
+	@echo "  ***********************                                        ***********************"
+	@echo "***********************.......Buidling ./minishell ...... Done!!...***********************"
+	@echo "  ***********************                                        ***********************"
+	@echo "\n"
 
 $(NAME): $(LIBFT) $(OBJS) $(PATHO)
 	@$(CC) $(FLAGS) $(LIBFT) $(OBJS) $(READLINE_LIB) -o $(NAME)
 
 $(PATHO)%.o:: $(PATHSP)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}					in	$(PATHSP)${END}"
+	@echo "Compiling ${notdir $<}									in	$(PATHSP)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHS)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}					in	$(PATHS)${END}"
-	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+	@echo "Compiling ${notdir $<}									in	$(PATHS)${END}"
+	@$(CC) -c $(FLAGS) $(INCLUDES)s $< -o $@
 
 $(PATHO)%.o:: $(PATHSL)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}					in	$(PATHSL)${END}"
+	@echo "Compiling ${notdir $<}									in	$(PATHSL)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSB)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}					in	$(PATHSB)${END}"
+	@echo "Compiling ${notdir $<}									in	$(PATHSB)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSU)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}					in	$(PATHSU)${END}"
+	@echo "Compiling ${notdir $<}									in	$(PATHSU)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSE)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}			in	$(PATHSE)${END}"
+	@echo "Compiling ${notdir $<}									in	$(PATHSE)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHEX)%.c $(HEADERS)
-	@echo "${notdir $<}						in	$(PATHEX)${END}"
+	@echo "Compiling ${notdir $<}									in	$(PATHEX)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHINI)%.c $(HEADERS)
-	@echo "${notdir $<}						in	$(PATHINI)${END}"
+	@echo "Compiling ${notdir $<}									in	$(PATHINI)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(LIBFT):

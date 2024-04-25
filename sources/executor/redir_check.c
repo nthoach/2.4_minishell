@@ -1,12 +1,12 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirection_check.c                                :+:      :+:    :+:   */
+/*   redir_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:22 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:40:05 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -57,7 +57,7 @@ int	handle_infile(char *file)
 			STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	if (fd > 0 && dup2(fd, STDIN_FILENO) < 0) //dup2 
+	if (fd > 0 && dup2(fd, STDIN_FILENO) < 0)
 	{
 		ft_putstr_fd("minishell: pipe error\n", STDERR_FILENO);
 		return (EXIT_FAILURE);

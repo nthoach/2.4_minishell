@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:25:00 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:20 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:55:52 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -46,7 +46,7 @@ typedef enum e_word_type
 	STR,
 }	t_word_type;
 
-t_split	*split_input(char *input, t_data *data);
+t_split	*input2split(char *input, t_data *data);
 int		check_split(t_split *split);
 int		push_word(t_split *split, char *c, int type);
 void	free_split(t_split *split);

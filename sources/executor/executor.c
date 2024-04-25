@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:03 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:20:49 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -95,16 +95,7 @@ int	check_fd_heredoc(t_data *data, int end[2], t_cmds *cmd)
 		fd_in = end[0];
 	return (fd_in);
 }
-/*
-Initializes fd_in to STDIN_FILENO, representing the
-standard input file descriptor. Enters a loop to
-iterate over the command structures (t_cmds) in data->cmds.
-Calls the call_expander function to expand the command and redirections.
-If there is a next command (data->cmds->next), it creates
-a pipe using the pipe function and assigns the file descriptors to end.
-Sends the here-document if data->heredoc flag is true.
-Calls the ft_fork function to fork a child process and execute the command.
-*/
+//  executing commands with pip
 
 int	executor(t_data *data)
 {
@@ -113,7 +104,7 @@ int	executor(t_data *data)
 	t_cmds	*curr_cmd;
 
 	fd_in = STDIN_FILENO;
-	curr_cmd = data->cmds; //first command
+	curr_cmd = data->cmds;
 	while (curr_cmd)
 	{
 		if (curr_cmd->next)
@@ -135,42 +126,19 @@ int	executor(t_data *data)
 	return (0);
 }
 
-/*
-The prepare_executor function is responsible for setting
- up the executor to execute commands entered by the user.
-It sets up signal handling and calls the appropriate
-functions depending on whether there are pipes or not.
-This function sets up the executor to execute commands
-entered by the user.
-It sets up the signal handling for the execution
- of commands, specifically handling the SIGQUIT
- signal (usually triggered by pressing Ctrl+).
-It sets the in_cmd flag in the g_global structure
- to indicate that the minishell is currently
-  executing a command.
-If there are no pipes in the command, it
-calls the single_cmd function to execute
-the single command stored in the command list (cmdss).
-If there are pipes in the command, it
-allocates memory for an array of process IDs
- (pid) to track the child processes.
-It calls the executor function to execute the
-commands with pipes, which handles the creation
-of pipes, forking child processes, and connecting
-them with pipes for communication.
-*/
-int	prepare_executor(t_data *data)
+//executing all the command from data
+int	exec_all(t_data *data)
 {
 	signal(SIGQUIT, sigquit_handler);
 	g_status_code = IN_CMD;
 	if (data->pipes == 0)
-		single_cmd(data->cmds, data); //execution single cmd
+		single_cmd(data->cmds, data);
 	else
 	{
 		data->pid = ft_calloc(data->pipes + 2, sizeof(int));
 		if (!data->pid)
 			return (ft_error(1));
-		if (executor(data)) //execution here
+		if (executor(data))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

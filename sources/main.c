@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:45 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 21:11:13 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:50:20 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,8 +32,8 @@ void	minishell_loop(t_data *data)
 			continue ;
 		}
 		add_history(data->input);
-		if (parse_input(data))
-			prepare_executor(data);
+		if (parse_all(data))
+			exec_all(data);
 		reset_data(data);
 	}
 }

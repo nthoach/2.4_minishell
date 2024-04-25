@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 21:07:47 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:54:41 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -94,14 +94,14 @@ int	count_args(t_word *start, char *command)
 // checks input and parses to a data struct
 // check_input invalid with ';' '&' '\'
 // split_input 
-int	parse_input(t_data *data)
+int	parse_all(t_data *data)
 {
 	t_split	*split;
 	int		sorted;
 
 	if (!check_input(data->input))
 		return (0);
-	split = split_input(data->input, data);
+	split = input2split(data->input, data);
 	if (!split)
 		return (0);
 	sorted = sort_tokens(split, data);

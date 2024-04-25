@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:23:48 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:19 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:15:52 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,7 +21,7 @@ int				handle_outfile(t_redir *redir);
 int				handle_open(t_redir *redir);
 
 // executor
-int				prepare_executor(t_data *data);
+int				exec_all(t_data *data);
 int				executor(t_data *data);
 int				pipe_wait(int *pid, int amount);
 int				exec_error(char *str, int code);
