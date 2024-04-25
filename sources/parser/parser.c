@@ -6,14 +6,14 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 21:54:41 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 22:06:08 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../../headers/minishell.h"
 
 // sorts tokens to list of commands
-int	sort_tokens(t_split *split, t_data *data)
+int	split2cmds(t_split *split, t_data *data)
 {
 	t_word	*ptr;
 	t_cmds	*new_cmd;
@@ -104,7 +104,7 @@ int	parse_all(t_data *data)
 	split = input2split(data->input, data);
 	if (!split)
 		return (0);
-	sorted = sort_tokens(split, data);
+	sorted = split2cmds(split, data);
 	free_split(split);
 	data->pipes = count_pipes(data);
 	return (sorted);

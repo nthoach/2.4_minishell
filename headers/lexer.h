@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:25:00 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 21:55:52 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 22:20:27 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -55,7 +55,7 @@ void	print_split(t_split *split);
 int		combine_quotes(t_split *split);
 t_word	*new_word(char *c, int type);
 int		expand_env(t_split *split, t_data *data);
-void	sort_split(t_split *split);
+void	label_word(t_split *split);
 char	*expand_env_quotes(t_word *word, int *i, t_data *data);
 int		found_env(char *old, int *i, t_word *word, t_data *data);
 int		found_env_helper(t_word *word, char *old, int *i);

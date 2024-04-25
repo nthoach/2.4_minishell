@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:25 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 21:55:26 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 22:18:59 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -32,7 +32,7 @@ void	free_split(t_split *split)
 }
 
 // splits input to space-separated words
-int	split_words(char *input, t_split *split)
+int	input2words(char *input, t_split *split)
 {
 	int	i;
 
@@ -61,7 +61,7 @@ t_split	*input2split(char *input, t_data *data)
 		ft_error(1);
 		return (0);
 	}
-	if (!split_words(input, split) || !check_split(split))
+	if (!input2words(input, split) || !check_split(split))
 	{
 		free_split(split);
 		return (0);
@@ -71,12 +71,12 @@ t_split	*input2split(char *input, t_data *data)
 		free_split(split);
 		return (0);
 	}
-	sort_split(split);
+	label_word(split);
 	return (split);
 }
 
 // sorts the type of word
-void	sort_split(t_split *split)
+void	label_word(t_split *split)
 {
 	t_word	*ptr;
 

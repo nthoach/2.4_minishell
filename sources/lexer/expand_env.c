@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:42 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 22:29:57 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -69,7 +69,7 @@ int	found_env(char *old, int *i, t_word *word, t_data *data)
 	return (1);
 }
 
-// expands env variables except in quotes
+// expands env variables except in quotes, expand_err = $?
 int	expand_env_str(t_word *word, t_data *data)
 {
 	int		i;
@@ -91,7 +91,7 @@ int	expand_env_str(t_word *word, t_data *data)
 		/*// tidle ~
 		else if (word->cont[i] == '~')
 		{
-			word->cont = expand_tidle(word->cont,&i);
+			word->cont = expand_tidle(word->cont,&i, word, data);
 		}
 	
 		// tidle ~
@@ -140,7 +140,7 @@ int	expand_env(t_split *split, t_data *data)
 	while (ptr)
 	{
 		if (ptr->type == STR || ptr->type == CMD
-			|| ptr->type == ARG || ptr->type == PATH) // Only STR effective
+			|| ptr->type == ARG || ptr->type == PATH)
 			success = expand_env_str(ptr, data);
 		else if (ptr->type == QUOTE)
 			success = expand_var_quote(ptr, data);
