@@ -1,16 +1,16 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   lexer_data.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:00 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:34:02 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 // creates new word
 t_word	*new_word(char *c, int type)
@@ -76,7 +76,7 @@ void	print_split(t_split *split)
 	}
 }
 
-char	*expand_env_quotes(t_word *word, int *i, t_utils *utils)
+char	*expand_env_quotes(t_word *word, int *i, t_data *data)
 {
 	if (word->cont[(*i)] == '\"')
 	{
@@ -88,7 +88,7 @@ char	*expand_env_quotes(t_word *word, int *i, t_utils *utils)
 				if (word->cont[(*i) + 1] && word->cont[(*i) + 1] == '?')
 					word->cont = expand_err(word->cont, i);
 				else
-					found_env(word->cont, i, word, utils);
+					found_env(word->cont, i, word, data);
 				return (word->cont);
 			}
 			else

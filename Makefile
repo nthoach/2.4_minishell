@@ -12,9 +12,11 @@ PATHSU = sources/utils/
 PATHSE = sources/error/
 PATHP = sources/pipex/
 PATHEX = sources/executor/
+PATHINI = sources/init/
 
 sources	=	sources/main.c \
-		sources/signal.c \
+		sources/init/init_signal.c \
+		sources/init/init_utils.c \
 		sources/builtins/builtins.c \
 		sources/builtins/m_cd.c \
 		sources/builtins/m_echo.c \
@@ -50,21 +52,21 @@ OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 
 LIBFT	=	./libft/libft.a
 
-HEADERS	=	./includes/builtins.h \
-			./includes/color.h \
-			./includes/error.h \
-			./includes/executor.h \
-			./includes/minishell.h \
-			./includes/parsing.h \
-			./includes/lexer.h \
-			./includes/utils.h
+HEADERS	=	./headers/builtins.h \
+			./headers/color.h \
+			./headers/error.h \
+			./headers/executor.h \
+			./headers/minishell.h \
+			./headers/parsing.h \
+			./headers/lexer.h \
+			./headers/utils.h
 
 READLINE_DIR = "/opt/homebrew/Cellar/readline/8.2.10"
 
 READLINE_LIB = -L $(READLINE_DIR)/lib -L$(LIBFTP) -lft -lreadline -lhistory 
 
 
-INCLUDES = -I./includes -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
+INCLUDES = -I./headers -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
 
 all: $(PATHO) $(NAME)
 
@@ -97,6 +99,10 @@ $(PATHO)%.o:: $(PATHSE)%.c $(HEADERS)
 
 $(PATHO)%.o:: $(PATHEX)%.c $(HEADERS)
 	@echo "${notdir $<}											in	$(PATHEX)${END}"
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATHO)%.o:: $(PATHINI)%.c $(HEADERS)
+	@echo "${notdir $<}											in	$(PATHINI)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(LIBFT):

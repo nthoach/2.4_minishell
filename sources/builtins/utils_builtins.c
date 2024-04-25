@@ -1,27 +1,27 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_builtins.c                                   :+:      :+:    :+:   */
+/*   data_builtins.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:14 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:32:15 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:57:24 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
-// This function updates the utils struct with the new paths
-void	change_path(t_utils *utils)
+// This function updates the data struct with the new paths
+void	change_path(t_data *data)
 {
 	char	*tmp;
 
-	tmp = ft_strdup(utils->pwd);
-	free(utils->old_pwd);
-	utils->old_pwd = tmp;
-	free(utils->pwd);
-	utils->pwd = getcwd(NULL, 0);
+	tmp = ft_strdup(data->pwd);
+	free(data->old_pwd);
+	data->old_pwd = tmp;
+	free(data->pwd);
+	data->pwd = getcwd(NULL, 0);
 }
 
 size_t	equal_sign(char *str)

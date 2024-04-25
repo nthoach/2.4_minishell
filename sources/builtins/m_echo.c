@@ -6,11 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:18 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:31:23 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:29 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 void	print_lines(int i, char **str, int out)
 {
@@ -36,7 +36,7 @@ print_lines(i, cmds->args, STDOUT_FILENO);
 if (n_option == false)
 	ft_putchar_fd('\n', STDOUT_FILENO);
 */
-int	m_echo(t_utils *utils, t_cmds *cmds)
+int	m_echo(t_data *data, t_cmds *cmds)
 {
 	int		i;
 	int		j;
@@ -44,7 +44,7 @@ int	m_echo(t_utils *utils, t_cmds *cmds)
 
 	i = 1;
 	n_option = false;
-	(void) utils;
+	(void) data;
 	while (cmds->args[i] && cmds->args[i][0] == '-'
 		&& cmds->args[i][1] == 'n')
 	{

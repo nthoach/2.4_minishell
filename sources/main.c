@@ -6,54 +6,51 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:45 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:35:46 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:26 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../includes/minishell.h"
+#include "../headers/minishell.h"
 
-// accepts input from user for parsing and execution
-void	minishell_loop(t_utils *utils)
+void	minishell_loop(t_data *data)
 {
-
+	printf("\n%s\n\n", WELCOME_MSG);
 	while (1)
 	{
-		utils->input = readline(READLINE_MSG);
-		implement_utils(utils); //set utils->paths, cmds, pid, heredocs 
-		//<old_position> implement_utils(utils); //check(utils->input); initialize utils and make sure paths
-		if (!utils->input) //Error handling of readline
+		data->input = readline(READLINE_MSG);
+		ini2_data(data);
+		if (!data->input) 
 		{
-			reset_utils(utils); //free cmds, paths
-			free_utils(utils); //free pwd, old_pwd, envp
+			reset_data(data);
+			free_data(data);
 			printf("exit\n");
 			exit(EXIT_SUCCESS);
 		}
-		else if (utils->input[0] == '\0') //when user press ENTER only
+		else if (data->input[0] == '\0')
 		{
-			reset_utils(utils); //free cmds, paths
+			reset_data(data);
 			continue ;
 		}
-		add_history(utils->input); //buildin of readline lib, add input into command history list
-		if (parse_input(utils)) // make linked list split, run command
-			prepare_executor(utils);
-		reset_utils(utils);
+		add_history(data->input);
+		if (parse_input(data))
+			prepare_executor(data);
+		reset_data(data);
 	}
 }
 
 // initialization of minishell
 int	main(int argc, char **argv, char **envp)
 {
-	t_utils	utils;
+	t_data	data;
 
 	if (argc != 1 || argv[1])
 	{
-		printf("No argument needed\n");
+		printf("just run:'./minishell' !! No argument needed !!\n");
 		exit(0);
 	}
 	init_signals();
-	init_utils(&utils, envp);
-	printf("\n%s\n\n", WELCOME_MSG);
-	minishell_loop(&utils);
-	free_utils(&utils);
+	ini1_data(&data, envp);
+	minishell_loop(&data);
+	free_data(&data);
 	return (0);
 }

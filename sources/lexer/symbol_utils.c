@@ -1,16 +1,16 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   symbol_utils.c                                     :+:      :+:    :+:   */
+/*   symbol_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:35 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:34:37 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 //checks if character is a space
 int	is_space(char c)

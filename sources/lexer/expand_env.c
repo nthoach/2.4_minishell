@@ -6,11 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:42 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:33:44 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 // replaces the environment var with its value
 char	*replace_env(char *str, int *i, char *exp, int len)
@@ -42,7 +42,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 }
 
 // finds location of env and allocates memory for replacement
-int	found_env(char *old, int *i, t_word *word, t_utils *utils)
+int	found_env(char *old, int *i, t_word *word, t_data *data)
 {
 	int		len;
 	char	*var;
@@ -59,7 +59,7 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 	(*i)++;
 	while (j < len)
 		var[j++] = old[(*i)++];
-	env = ft_getenv(var, utils);
+	env = ft_getenv(var, data);
 	if (!env)
 		return (0);
 	word->cont = replace_env(old, i, env, len);
@@ -70,7 +70,7 @@ int	found_env(char *old, int *i, t_word *word, t_utils *utils)
 }
 
 // expands env variables except in quotes
-int	expand_env_str(t_word *word, t_utils *utils)
+int	expand_env_str(t_word *word, t_data *data)
 {
 	int		i;
 
@@ -85,9 +85,17 @@ int	expand_env_str(t_word *word, t_utils *utils)
 			i = i + 2;
 		else if (word->cont[i] == '$' && word->cont[i + 1])
 		{
-			if (!found_env(word->cont, &i, word, utils))
+			if (!found_env(word->cont, &i, word, data))
 				return (0);
 		}
+		/*// tidle ~
+		else if (word->cont[i] == '~')
+		{
+			word->cont = expand_tidle(word->cont,&i);
+		}
+	
+		// tidle ~
+		*/
 		else
 			i++;
 	}
@@ -95,7 +103,7 @@ int	expand_env_str(t_word *word, t_utils *utils)
 }
 
 // expands env variables in double quotes
-int	expand_var_quote(t_word *word, t_utils *utils)
+int	expand_var_quote(t_word *word, t_data *data)
 {
 	int	i;
 
@@ -108,12 +116,12 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 			&& word->cont[i + 1] == '?')
 			word->cont = expand_err(word->cont, &i);
 		else if (word->cont[i] == '$'
-			&& !found_env(word->cont, &i, word, utils))
+			&& !found_env(word->cont, &i, word, data))
 			return (0);
 		else if (word->cont[i] == '\'')
 			skip_quotes(&i, word->cont);
 		else if (word->cont[i] == '\"')
-			word->cont = expand_env_quotes(word, &i, utils);
+			word->cont = expand_env_quotes(word, &i, data);
 		else
 			i++;
 	}
@@ -122,7 +130,7 @@ int	expand_var_quote(t_word *word, t_utils *utils)
 
 // redirects tokens to expanders
 // where is type of ARG, CMD, PATH ?
-int	expand_env(t_split *split, t_utils *utils)
+int	expand_env(t_split *split, t_data *data)
 {
 	t_word	*ptr;
 	int		success;
@@ -133,9 +141,9 @@ int	expand_env(t_split *split, t_utils *utils)
 	{
 		if (ptr->type == STR || ptr->type == CMD
 			|| ptr->type == ARG || ptr->type == PATH) // Only STR effective
-			success = expand_env_str(ptr, utils);
+			success = expand_env_str(ptr, data);
 		else if (ptr->type == QUOTE)
-			success = expand_var_quote(ptr, utils);
+			success = expand_var_quote(ptr, data);
 		if (!success)
 			return (0);
 		ptr = ptr->next;

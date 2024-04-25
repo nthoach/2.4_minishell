@@ -6,11 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:22 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:32:24 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:39 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 int	ft_error(int error)
 {
@@ -70,7 +70,7 @@ int	invalid_token_error(char *c)
 	return (EXIT_FAILURE);
 }
 
-int	token_error(t_utils *utils, int code)
+int	token_error(t_data *data, int code)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
 		STDERR_FILENO);
@@ -86,7 +86,7 @@ int	token_error(t_utils *utils, int code)
 		ft_putstr_fd("'|'\n", STDERR_FILENO);
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
-	if (utils)
-		reset_utils(utils);
+	if (data)
+		reset_data(data);
 	return (EXIT_FAILURE);
 }

@@ -6,11 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:35 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:31:37 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:31 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 int	is_str_digit(char *str)
 {
@@ -51,11 +51,11 @@ void	determine_exit_code(char **str)
 
 // This check if the exit function has more that two arguments
 // free before you determine the exit_code and exit
-int	m_exit(t_utils *utils, t_cmds *cmds)
+int	m_exit(t_data *data, t_cmds *cmds)
 {
 	char	**str;
 
-	if (utils->pipes == 0)
+	if (data->pipes == 0)
 		ft_putendl_fd("exit", STDERR_FILENO);
 	if (cmds->args[1] && cmds->args[2] && is_str_digit(cmds->args[1]))
 	{
@@ -67,13 +67,13 @@ int	m_exit(t_utils *utils, t_cmds *cmds)
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(cmds->args[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		reset_utils(utils);
-		free_utils(utils);
+		reset_data(data);
+		free_data(data);
 		exit(255);
 	}
 	str = ft_arrdup(cmds->args);
-	reset_utils(utils);
-	free_utils(utils);
+	reset_data(data);
+	free_data(data);
 	determine_exit_code(str);
 	return (EXIT_SUCCESS);
 }

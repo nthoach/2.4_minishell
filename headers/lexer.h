@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:25:00 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:25:03 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:20 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -16,7 +16,7 @@
 # include "parsing.h"
 
 typedef struct s_word	t_word;
-typedef struct s_utils	t_utils;
+typedef struct s_data	t_data;
 
 typedef struct s_split
 {
@@ -46,7 +46,7 @@ typedef enum e_word_type
 	STR,
 }	t_word_type;
 
-t_split	*split_input(char *input, t_utils *utils);
+t_split	*split_input(char *input, t_data *data);
 int		check_split(t_split *split);
 int		push_word(t_split *split, char *c, int type);
 void	free_split(t_split *split);
@@ -54,10 +54,10 @@ int		define_word(char *input, int *i, t_split *split);
 void	print_split(t_split *split);
 int		combine_quotes(t_split *split);
 t_word	*new_word(char *c, int type);
-int		expand_env(t_split *split, t_utils *utils);
+int		expand_env(t_split *split, t_data *data);
 void	sort_split(t_split *split);
-char	*expand_env_quotes(t_word *word, int *i, t_utils *utils);
-int		found_env(char *old, int *i, t_word *word, t_utils *utils);
+char	*expand_env_quotes(t_word *word, int *i, t_data *data);
+int		found_env(char *old, int *i, t_word *word, t_data *data);
 int		found_env_helper(t_word *word, char *old, int *i);
 
 #endif

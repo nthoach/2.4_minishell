@@ -6,16 +6,16 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:02 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:31:04 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:27 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 // it accepts *str, and returns function pointer
 // if there is no much it returns null.
 
-int	(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds)
+int	(*builtin_arr(char *str))(t_data *data, t_cmds *cmds)
 {
 	static void	*builtins[7][2] = {
 	{"echo", m_echo},
@@ -39,13 +39,13 @@ int	(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds)
 	return (NULL);
 }
 
-int	p_specific_path(t_utils *utils, char *str)
+int	p_specific_path(t_data *data, char *str)
 {
 	char	*tmp;
 	int		ret;
 
 	ret = -1;
-	tmp = find_path_ret(str, utils);
+	tmp = find_path_ret(str, data);
 	if (tmp)
 	{
 		ret = chdir(tmp);

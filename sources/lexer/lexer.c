@@ -6,11 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:25 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:34:27 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 // frees split structure
 void	free_split(t_split *split)
@@ -51,7 +51,7 @@ int	split_words(char *input, t_split *split)
 
 // splits input, checks errors, expands env,
 // combines quotes, and sorts type
-t_split	*split_input(char *input, t_utils *utils)
+t_split	*split_input(char *input, t_data *data)
 {
 	t_split	*split;
 
@@ -69,7 +69,7 @@ t_split	*split_input(char *input, t_utils *utils)
 		return (0);
 	}
 	//check expansion in STR word and replace expansion accordingly
-	if (!expand_env(split, utils) || !combine_quotes(split))
+	if (!expand_env(split, data) || !combine_quotes(split))
 	{
 		free_split(split);
 		return (0);

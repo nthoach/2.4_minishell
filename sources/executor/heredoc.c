@@ -6,11 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:13 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:33:15 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 int	display_error(int errorCode)
 {
@@ -80,7 +80,7 @@ It is set to 1 (true) when entering the
 ft_heredoc function and creating a
 here document, and set back to 0 (false)
 */
-int	ft_heredoc(t_utils *utils, t_redir *heredoc, char *file_name)
+int	ft_heredoc(t_data *data, t_redir *heredoc, char *file_name)
 {
 	int		sl;
 
@@ -89,7 +89,7 @@ int	ft_heredoc(t_utils *utils, t_redir *heredoc, char *file_name)
 	sl = create_heredoc(heredoc, file_name);
 	g_status_code = sl;
 	if (sl == EXIT_SUCCESS)
-		utils->heredoc = true;
+		data->heredoc = true;
 	return (sl);
 }
 
@@ -144,7 +144,7 @@ It calls the ft_heredoc function to
 create the here document. The ft_heredoc
 function handles the processing of a
 single here document, and it is called
-with the utils pointer, the current
+with the data pointer, the current
 redirection (cmd->redirections), and
 the generated filename (cmd->hd_file_name)
 as arguments. The result of the
@@ -154,11 +154,11 @@ ft_heredoc function is stored in the sl variable
 if the ft_heredoc function returns a
 non-zero value (EXIT_FAILURE), it sets
 g_global.error_num to 1 to indicate
-an error and returns reset_utils(utils).
+an error and returns reset_data(data).
 This is done to handle any failure
 during here document processing.
 */
-int	send_heredoc(t_utils *utils, t_cmds *cmd)
+int	send_heredoc(t_data *data, t_cmds *cmd)
 {
 	t_redir	*redir;
 	int		sl;
@@ -173,8 +173,8 @@ int	send_heredoc(t_utils *utils, t_cmds *cmd)
 				free (cmd->hd_file_name);
 			//standard name with number of order
 			cmd->hd_file_name = generate_heredoc_filename();
-			//write contents of heredoc file, set parameters for utils, cmd
-			sl = ft_heredoc(utils, redir, cmd->hd_file_name);
+			//write contents of heredoc file, set parameters for data, cmd
+			sl = ft_heredoc(data, redir, cmd->hd_file_name);
 			if (sl)
 				return (EXIT_FAILURE);
 		}

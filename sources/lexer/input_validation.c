@@ -6,11 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:33:53 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 // checks if char is present in string
 static int	invalid_char(char *input, char c)

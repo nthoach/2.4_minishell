@@ -1,16 +1,16 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor_utils.c                                   :+:      :+:    :+:   */
+/*   executor_data.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:54 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:32:56 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 /*
 It takes two arguments: split_str, which is an array of strings,
  and new_str, which is a string.
@@ -98,7 +98,7 @@ int	exec_error(char *str, int code)
 	return (126);
 }
 
-int	loop_paths(t_utils *utils, t_cmds *cmd)
+int	loop_paths(t_data *data, t_cmds *cmd)
 {
 	int		i;
 	char	*mycmd;
@@ -106,12 +106,12 @@ int	loop_paths(t_utils *utils, t_cmds *cmd)
 	i = 0;
 	if (cmd->command[0] != '/' && cmd->command[0] != '.') //not a path cmd but join to a path
 	{
-		while (utils->paths && utils->paths[i])
+		while (data->paths && data->paths[i])
 		{
-			mycmd = ft_strjoin(utils->paths[i], cmd->command);
+			mycmd = ft_strjoin(data->paths[i], cmd->command);
 			if (!access(mycmd, F_OK))
 			{
-				execve(mycmd, cmd->args, utils->envp); //execute a cmd
+				execve(mycmd, cmd->args, data->envp); //execute a cmd
 				return (find_exec_error(mycmd, 1));
 			}
 			free(mycmd);

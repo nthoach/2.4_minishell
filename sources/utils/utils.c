@@ -1,25 +1,25 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   data.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:36 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:35:38 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:41:01 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
-// initializes utils values
-int	implement_utils(t_utils *utils)
+// write data->paths, init cmds/pid/herdoc
+int	ini2_data(t_data *data)
 {
-	parse_paths(utils); //write(utils->paths)
-	utils->cmds = NULL;
-	utils->pid = NULL;
-	utils->heredoc = false;
-	return (1); // why not return (EXIT_SUCCESS);
+	parse_paths(data);
+	data->cmds = NULL;
+	data->pid = NULL;
+	data->heredoc = false;
+	return (1);
 }
 
 // frees memory associated with a cmd
@@ -45,36 +45,36 @@ void	free_cmd(t_cmds *cmd)
 		free(cmd);
 }
 
-// resets utils variables
-int	reset_utils(t_utils *utils)
+// resets data variables
+int	reset_data(t_data *data)
 {
 	t_cmds	*ptr;
 	t_cmds	*del;
 
-	ptr = utils->cmds; // to free all utils->cmds link list
+	ptr = data->cmds; // to free all data->cmds link list
 	while (ptr)
 	{
 		del = ptr;
 		ptr = ptr->next;
 		free_cmd(del);
 	}
-	if (utils->input)
-		free(utils->input); // to free the input
-	if (utils->pid)
-		free(utils->pid); // why do we need to free pid?
-	utils->reset = true;
-	free_double_ptr((void **)utils->paths); // why need to free paths
+	if (data->input)
+		free(data->input); // to free the input
+	if (data->pid)
+		free(data->pid); // why do we need to free pid?
+	data->reset = true;
+	free_double_ptr((void **)data->paths); // why need to free paths
 	return (1);
 }
 
 // free memory on exit
-void	free_utils(t_utils *utils)
+void	free_data(t_data *data)
 {
-	if (utils->pwd)
-		free(utils->pwd);
-	if (utils->old_pwd)
-		free(utils->old_pwd);
-	free_double_ptr((void **) utils->envp);
+	if (data->pwd)
+		free(data->pwd);
+	if (data->old_pwd)
+		free(data->old_pwd);
+	free_double_ptr((void **) data->envp);
 }
 
 // duplicates the passed string

@@ -6,22 +6,22 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:09 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:31:12 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:28 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 // find the string str in envp and return its remain part of envp[i] excluding str
-char	*find_path_ret(char *str, t_utils *utils)
+char	*find_path_ret(char *str, t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (utils->envp && utils->envp[i])
+	while (data->envp && data->envp[i])
 	{
-		if (!ft_strncmp(utils->envp[i], str, ft_strlen(str)))
-			return (ft_substr(utils->envp[i], ft_strlen(str),
-					ft_strlen(utils->envp[i]) - ft_strlen(str)));
+		if (!ft_strncmp(data->envp[i], str, ft_strlen(str)))
+			return (ft_substr(data->envp[i], ft_strlen(str),
+					ft_strlen(data->envp[i]) - ft_strlen(str)));
 		i++;
 	}
 	return (NULL);
@@ -33,13 +33,13 @@ char	*find_path_ret(char *str, t_utils *utils)
 // will return 0 if it successfully changes the working directory
 // if it didn't successfully change the directory
 // it will go inside the if condition to print error
-int	specific_path(t_utils *utils, char *str)
+int	specific_path(t_data *data, char *str)
 {
 	char	*tmp;
 	int		ret;
 
 	ret = -1;
-	tmp = find_path_ret(str, utils);
+	tmp = find_path_ret(str, data);
 	if (tmp)
 	{
 		ret = chdir(tmp);
@@ -64,25 +64,25 @@ with PWD= and update it in the env variable (PWD=/users/szerisen)
 // This will do the same thing as the first one
 which is concatinating OLDPWD= with the value of old_pwd
 */
-void	update_path_to_env(t_utils *utils)
+void	update_path_to_env(t_data *data)
 {
 	int		i;
 	char	*tmp;
 
 	i = 0;
-	while (utils->envp && utils->envp[i])
+	while (data->envp && data->envp[i])
 	{
-		if (!ft_strncmp(utils->envp[i], "PWD=", 4))
+		if (!ft_strncmp(data->envp[i], "PWD=", 4))
 		{
-			tmp = ft_strjoin("PWD=", utils->pwd);
-			free(utils->envp[i]);
-			utils->envp[i] = tmp;
+			tmp = ft_strjoin("PWD=", data->pwd);
+			free(data->envp[i]);
+			data->envp[i] = tmp;
 		}
-		else if (!ft_strncmp(utils->envp[i], "OLDPWD=", 7) && utils->old_pwd)
+		else if (!ft_strncmp(data->envp[i], "OLDPWD=", 7) && data->old_pwd)
 		{
-			tmp = ft_strjoin("OLDPWD=", utils->old_pwd);
-			free(utils->envp[i]);
-			utils->envp[i] = tmp;
+			tmp = ft_strjoin("OLDPWD=", data->old_pwd);
+			free(data->envp[i]);
+			data->envp[i] = tmp;
 		}
 		i++;
 	}
@@ -100,7 +100,7 @@ void	update_path_to_env(t_utils *utils)
 // of 0 typically indicates a successful execution of chdir.
 // This function will update the pwd and old_pwd variables
 // with the new paths.
-int	cd_helper(t_utils *utils, t_cmds *cmds)
+int	cd_helper(t_data *data, t_cmds *cmds)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -109,7 +109,7 @@ int	cd_helper(t_utils *utils, t_cmds *cmds)
 
 	if (cmds->args[1][0] == '~')
 	{
-		tmp = find_path_ret("HOME=", utils);
+		tmp = find_path_ret("HOME=", data);
 		tmp1 = ft_substr(cmds->args[1], 1, ft_strlen(cmds->args[1]) - 1);
 		tmp2 = ft_strjoin(tmp, tmp1);
 		ret = chdir(tmp2);
@@ -128,19 +128,19 @@ int	cd_helper(t_utils *utils, t_cmds *cmds)
 	return (ret);
 }
 
-int	m_cd(t_utils *utils, t_cmds *cmds)
+int	m_cd(t_data *data, t_cmds *cmds)
 {
 	int	ret;
 
 	if (!cmds->args[1])
-		ret = specific_path(utils, "HOME=");
+		ret = specific_path(data, "HOME=");
 	else if (ft_strncmp(cmds->args[1], "-", 1) == 0)
-		ret = specific_path(utils, "OLDPWD=");
+		ret = specific_path(data, "OLDPWD=");
 	else
-		ret = cd_helper(utils, cmds);
+		ret = cd_helper(data, cmds);
 	if (ret != 0)
 		return (EXIT_FAILURE);
-	change_path(utils);
-	update_path_to_env(utils);
+	change_path(data);
+	update_path_to_env(data);
 	return (EXIT_SUCCESS);
 }

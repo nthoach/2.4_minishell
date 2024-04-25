@@ -6,57 +6,57 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:26 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:35:28 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
-void	check_pwd(t_utils *utils)
+void	check_pwd(t_data *data)
 {
 	char	**tmp;
 	char	*var;
 
-	if (!utils->envp)
-		utils->envp = (char **) ft_calloc(2, sizeof(char *));
-	if (!utils->pwd || !utils->old_pwd)
+	if (!data->envp)
+		data->envp = (char **) ft_calloc(2, sizeof(char *));
+	if (!data->pwd || !data->old_pwd)
 	{
-		utils->pwd = getcwd(NULL, 0);
-		utils->old_pwd = NULL;
-		tmp = utils->envp;
-		var = ft_strjoin("PWD=", utils->pwd);
-		utils->envp = add_var(utils->envp, var);
+		data->pwd = getcwd(NULL, 0);
+		data->old_pwd = NULL;
+		tmp = data->envp;
+		var = ft_strjoin("PWD=", data->pwd);
+		data->envp = add_var(data->envp, var);
 		free_double_ptr((void **) tmp);
 		free(var);
-		var = ft_strjoin("OLDPWD=", utils->old_pwd);
-		tmp = utils->envp;
-		utils->envp = add_var(utils->envp, var);
+		var = ft_strjoin("OLDPWD=", data->old_pwd);
+		tmp = data->envp;
+		data->envp = add_var(data->envp, var);
 		free_double_ptr((void **) tmp);
 		free(var);
 	}
 }
 
 /* gets hold of the present working directory
-and old pwd from the copied envp (utils->envp)
+and old pwd from the copied envp (data->envp)
 */
-int	find_pwd(t_utils *utils)
+int	find_pwd(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	utils->pwd = 0;
-	utils->old_pwd = 0;
-	while (utils->envp && utils->envp[i])
+	data->pwd = 0;
+	data->old_pwd = 0;
+	while (data->envp && data->envp[i])
 	{
-		if (!ft_strncmp(utils->envp[i], "PWD=", 4))
-			utils->pwd = ft_substr(utils->envp[i],
-					4, ft_strlen(utils->envp[i]) - 4);
-		else if (!ft_strncmp(utils->envp[i], "OLDPWD=", 7))
-			utils->old_pwd = ft_substr(utils->envp[i],
-					7, ft_strlen(utils->envp[i]) - 7);
+		if (!ft_strncmp(data->envp[i], "PWD=", 4))
+			data->pwd = ft_substr(data->envp[i],
+					4, ft_strlen(data->envp[i]) - 4);
+		else if (!ft_strncmp(data->envp[i], "OLDPWD=", 7))
+			data->old_pwd = ft_substr(data->envp[i],
+					7, ft_strlen(data->envp[i]) - 7);
 		i++;
 	}
-	check_pwd(utils);
+	check_pwd(data);
 	return (1);
 }
 
@@ -90,61 +90,46 @@ char	*find_path(char **envp)
 }
 
 /*
-This function takes a t_utils structure
+This function takes a t_data structure
  (likely containing utility variables) as a parameter.
-It calls the find_path function, passing utils->envp
+It calls the find_path function, passing data->envp
  as an argument, to obtain the "PATH" environment
   variable value.
 The returned value is stored in path_from_envp.
 It then splits path_from_envp using ':' as the
 delimiter to obtain individual paths, and
-stores them in utils->paths
+stores them in data->paths
 using ft_split. After storing the paths, it frees
 the memory allocated for path_from_envp.
-It then iterates through each path in utils->paths.
+It then iterates through each path in data->paths.
 For each path, it checks if the last character
 is not a slash ('/').
 If it's not a slash, it appends a slash to the
 path using ft_strjoin and assigns the updated
-path to utils->paths[i].
+path to data->paths[i].
 Finally, the function returns EXIT_SUCCESS,
 indicating successful parsing of the environment variables.
 */
-int	parse_paths(t_utils *utils)
+int	parse_paths(t_data *data)
 {
 	char	*path_from_envp;
 	int		i;
 	char	*tmp;
 
-	path_from_envp = find_path(utils->envp);
-	utils->paths = ft_split(path_from_envp, ':');
+	path_from_envp = find_path(data->envp);
+	data->paths = ft_split(path_from_envp, ':');
 	free(path_from_envp);
 	i = 0;
-	while (utils->paths[i])
+	while (data->paths[i])
 	{
-		if (ft_strncmp(&utils->paths[i][ft_strlen(utils->paths[i]) - 1],
+		if (ft_strncmp(&data->paths[i][ft_strlen(data->paths[i]) - 1],
 			"/", 1) != 0)
 		{
-			tmp = ft_strjoin(utils->paths[i], "/");
-			free(utils->paths[i]);
-			utils->paths[i] = tmp;
+			tmp = ft_strjoin(data->paths[i], "/");
+			free(data->paths[i]);
+			data->paths[i] = tmp;
 		}
 		i++;
 	}
 	return (EXIT_SUCCESS);
-}
-
-void	init_utils(t_utils *utils, char **envp)
-{
-	utils->cmds = 0;
-	utils->paths = 0;
-	utils->pwd = 0;
-	utils->old_pwd = 0;
-	utils->pipes = 0;
-	utils->pid = 0;
-	utils->envp = 0;
-	utils->reset = false;
-	if (*envp != 0)
-		utils->envp = ft_arrdup(envp);
-	find_pwd(utils);
 }

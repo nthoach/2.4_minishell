@@ -1,16 +1,16 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parser_data.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:45 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:34:46 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 // initializes a cmd struct
 t_word	*init_cmd(t_word *start, t_cmds *new_cmd)
@@ -59,16 +59,16 @@ char	**init_args(t_word *start, char *command)
 }
 
 // pushed command to list
-void	push_cmd(t_utils *utils, t_cmds *cmd)
+void	push_cmd(t_data *data, t_cmds *cmd)
 {
 	t_cmds	*ptr;
 
 	cmd->builtin = builtin_arr(cmd->command);
 	last_in_redir(cmd);
 	last_out_redir(cmd);
-	ptr = utils->cmds;
+	ptr = data->cmds;
 	if (!ptr)
-		utils->cmds = cmd;
+		data->cmds = cmd;
 	else
 	{
 		while (ptr->next)
@@ -78,17 +78,17 @@ void	push_cmd(t_utils *utils, t_cmds *cmd)
 	}
 }
 
-// returns value of the variable var in utils.envp
-char	*ft_getenv(char *var, t_utils *utils)
+// returns value of the variable var in data.envp
+char	*ft_getenv(char *var, t_data *data)
 {
 	int		i;
 	char	**value;
 	char	*ret;
 
 	i = -1;
-	while (utils->envp[++i])
+	while (data->envp[++i])
 	{
-		value = ft_split(utils->envp[i], '=');
+		value = ft_split(data->envp[i], '=');
 		if (!value)
 		{
 			ft_error(1);

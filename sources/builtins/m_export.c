@@ -6,24 +6,24 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:42 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:31:45 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:31 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
-int	variable_exist(t_utils *utils, char *str)
+int	variable_exist(t_data *data, char *str)
 {
 	int	i;
 
 	i = 0;
-	while (utils->envp[i])
+	while (data->envp[i])
 	{
-		if (ft_strncmp(utils->envp[i],
-				str, equal_sign(utils->envp[i])) == 0)
+		if (ft_strncmp(data->envp[i],
+				str, equal_sign(data->envp[i])) == 0)
 		{
-			free(utils->envp[i]);
-			utils->envp[i] = ft_strdup(str);
+			free(data->envp[i]);
+			data->envp[i] = ft_strdup(str);
 			return (1);
 		}
 		i++;
@@ -108,25 +108,25 @@ char	**add_var(char **arr, char *str)
 arguments we just return env (acts as env)
 if there is a second argument it will go inside the while loop
 variable exist will check if str exist in env variable */
-int	m_export(t_utils *utils, t_cmds *cmds)
+int	m_export(t_data *data, t_cmds *cmds)
 {
 	char	**tmp;
 	int		i;
 
 	i = 1;
 	if (!cmds->args[1] || cmds->args[1][0] == '\0')
-		sorted_env(utils);
+		sorted_env(data);
 	else
 	{
 		while (cmds->args[i])
 		{
 			if (!check_parameter(cmds->args[i])
-				&& !variable_exist(utils, cmds->args[i])
+				&& !variable_exist(data, cmds->args[i])
 				&& !invalid_identifier(cmds->args[i], 1))
 			{
-				tmp = add_var(utils->envp, cmds->args[i]);
-				free_double_ptr((void **)utils->envp);
-				utils->envp = tmp;
+				tmp = add_var(data->envp, cmds->args[i]);
+				free_double_ptr((void **)data->envp);
+				data->envp = tmp;
 			}
 			else if ((invalid_identifier(cmds->args[i], 1)
 					|| check_parameter(cmds->args[i])))

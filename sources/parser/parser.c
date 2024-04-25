@@ -6,14 +6,14 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:34:54 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 // sorts tokens to list of commands
-int	sort_tokens(t_split *split, t_utils *utils)
+int	sort_tokens(t_split *split, t_data *data)
 {
 	t_word	*ptr;
 	t_cmds	*new_cmd;
@@ -27,20 +27,20 @@ int	sort_tokens(t_split *split, t_utils *utils)
 		ptr = init_cmd(ptr, new_cmd);
 		if (!new_cmd || !new_cmd->args)
 			return (0);
-		push_cmd(utils, new_cmd); //run the command
+		push_cmd(data, new_cmd); //push cmd into list
 		if (ptr && ptr->type == PIPE)
 			ptr = ptr->next;
 	}
 	return (1);
 }
 
-int	count_pipes(t_utils *utils)
+int	count_pipes(t_data *data)
 {
 	t_cmds	*ptr;
 	int		count;
 
 	count = 0;
-	ptr = utils->cmds;
+	ptr = data->cmds;
 	while (ptr)
 	{
 		ptr = ptr->next;
@@ -52,30 +52,30 @@ int	count_pipes(t_utils *utils)
 // checks input and parses to a util struct
 // check_input invalid with ';' '&' '\'
 // split_input 
-int	parse_input(t_utils *utils)
+int	parse_input(t_data *data)
 {
 	t_split	*split;
 	int		sorted;
 
-	if (!check_input(utils->input)) // check 4 cases of errors: open quote ; & '\'
+	if (!check_input(data->input)) // check 4 cases of errors: open quote ; & '\'
 		return (0); // 0 = error
-	split = split_input(utils->input, utils);// make linked list t_split
+	split = split_input(data->input, data);// make linked list t_split
 	if (!split)
 		return (0);
-	sorted = sort_tokens(split, utils); //
+	sorted = sort_tokens(split, data); //
 	free_split(split);
-	utils->pipes = count_pipes(utils);
+	data->pipes = count_pipes(data);
 	return (sorted);
 }
 
-// print utils for visualization
-void	print_utils(t_utils *utils)
+// print data for visualization
+void	print_data(t_data *data)
 {
 	t_cmds	*c_ptr;
 	int		i;
 	t_redir	*r_ptr;
 
-	c_ptr = utils->cmds;
+	c_ptr = data->cmds;
 	while (c_ptr)
 	{
 		printf("cmd: %s\n", c_ptr->command);

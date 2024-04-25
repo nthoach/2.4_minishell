@@ -6,13 +6,13 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:05 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:32:07 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:36 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
-void	p_export(t_utils *utils, t_cmds *cmds)
+void	p_export(t_data *data, t_cmds *cmds)
 {
 	char	**tmp;
 	int		i;
@@ -25,12 +25,12 @@ void	p_export(t_utils *utils, t_cmds *cmds)
 		while (cmds->args[i])
 		{
 			if (!check_parameter(cmds->args[i])
-				&& !variable_exist(utils, cmds->args[i])
+				&& !variable_exist(data, cmds->args[i])
 				&& !invalid_identifier(cmds->args[i], 1))
 			{
-				tmp = add_var(utils->envp, cmds->args[i]);
-				free_double_ptr((void **)utils->envp);
-				utils->envp = tmp;
+				tmp = add_var(data->envp, cmds->args[i]);
+				free_double_ptr((void **)data->envp);
+				data->envp = tmp;
 			}
 			else if ((invalid_identifier(cmds->args[i], 1)
 					|| check_parameter(cmds->args[i])))
@@ -41,7 +41,7 @@ void	p_export(t_utils *utils, t_cmds *cmds)
 	return ;
 }
 
-void	p_exit(t_utils *utils, t_cmds *cmds)
+void	p_exit(t_data *data, t_cmds *cmds)
 {
 	int		exit_code;
 
@@ -55,24 +55,24 @@ void	p_exit(t_utils *utils, t_cmds *cmds)
 		exit_code = ft_atoi(cmds->args[1]);
 	else
 		exit_code = 255;
-	reset_utils(utils);
-	free_utils(utils);
+	reset_data(data);
+	free_data(data);
 	exit(exit_code);
 }
 
-void	p_unset(t_utils *utils, t_cmds *cmds)
+void	p_unset(t_data *data, t_cmds *cmds)
 {
 	char	**temp;
 
 	if (!cmds->args[1] || invalid_identifier(cmds->args[1], 0)
 		|| equal_sign(cmds->args[1]) != 0)
 		return ;
-	temp = del_var(utils->envp, cmds->args[1]);
-	free_double_ptr((void **) utils->envp);
-	utils->envp = temp;
+	temp = del_var(data->envp, cmds->args[1]);
+	free_double_ptr((void **) data->envp);
+	data->envp = temp;
 }
 
-void	p_cd(t_utils *utils, t_cmds *cmds)
+void	p_cd(t_data *data, t_cmds *cmds)
 {
 	int		ret;
 	char	*tmp;
@@ -80,12 +80,12 @@ void	p_cd(t_utils *utils, t_cmds *cmds)
 	char	*tmp2;
 
 	if (!cmds->args[1])
-		ret = p_specific_path(utils, "HOME=");
+		ret = p_specific_path(data, "HOME=");
 	else if (ft_strncmp(cmds->args[1], "-", 1) == 0)
-		ret = p_specific_path(utils, "OLDPWD=");
+		ret = p_specific_path(data, "OLDPWD=");
 	else if (cmds->args[1][0] == '~')
 	{
-		tmp = find_path_ret("HOME=", utils);
+		tmp = find_path_ret("HOME=", data);
 		tmp1 = ft_substr(cmds->args[1], 1, ft_strlen(cmds->args[1]) - 1);
 		tmp2 = ft_strjoin(tmp, tmp1);
 		ret = chdir(tmp2);
@@ -97,18 +97,18 @@ void	p_cd(t_utils *utils, t_cmds *cmds)
 		ret = chdir(cmds->args[1]);
 	if (ret != 0)
 		return ;
-	change_path(utils);
-	update_path_to_env(utils);
+	change_path(data);
+	update_path_to_env(data);
 }
 
-void	p_builtins(t_utils *utils, t_cmds *cmd)
+void	p_builtins(t_data *data, t_cmds *cmd)
 {
 	if (cmd->builtin == m_export)
-		p_export(utils, cmd);
+		p_export(data, cmd);
 	if (cmd->builtin == m_cd)
-		p_cd(utils, cmd);
+		p_cd(data, cmd);
 	if (cmd->builtin == m_exit)
-		p_exit(utils, cmd);
+		p_exit(data, cmd);
 	if (cmd->builtin == m_unset)
-		p_unset(utils, cmd);
+		p_unset(data, cmd);
 }

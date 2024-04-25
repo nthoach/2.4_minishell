@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:25:10 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:25:12 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:51:15 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -34,9 +34,9 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 
-int		parse_envp(t_utils *utils);
-int		find_pwd(t_utils *utils);
-int		reset_utils(t_utils *utils);
+int		parse_envp(t_data *data);
+int		find_pwd(t_data *data);
+int		reset_data(t_data *data);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 void	init_signals(void);
@@ -46,9 +46,9 @@ char	*delete_quotes_value(char *str);
 char	*delete_quotes(char *str, char c);
 char	*delete_quotes_export(char *str, char c);
 
-int		parse_paths(t_utils *utils);
+int		parse_paths(t_data *data);
 
-int		(*builtin_arr(char *str))(t_utils *utils, t_cmds *cmds);
+int		(*builtin_arr(char *str))(t_data *data, t_cmds *cmds);
 
 int		g_status_code;
 

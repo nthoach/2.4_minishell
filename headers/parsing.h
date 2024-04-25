@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:25:15 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:25:17 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:23 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -25,7 +25,7 @@
 typedef struct s_cmds	t_cmds;
 typedef struct s_redir	t_redir;
 
-typedef struct s_utils
+typedef struct s_data
 {
 	struct s_cmds	*cmds;
 	char			*input;
@@ -37,7 +37,7 @@ typedef struct s_utils
 	int				*pid;
 	bool			reset;
 	bool			heredoc;
-}	t_utils;
+}	t_data;
 
 typedef struct s_cmds
 {
@@ -45,7 +45,7 @@ typedef struct s_cmds
 	char			**args;
 	t_redir			*redirections;
 	struct s_cmds	*next;
-	int				(*builtin)(t_utils *, t_cmds *);
+	int				(*builtin)(t_data *, t_cmds *);
 	struct s_cmds	*prev;
 	char			*hd_file_name;
 }	t_cmds;
@@ -74,13 +74,13 @@ int		is_quote(char c);
 int		is_symbol(char c);
 void	skip_quotes(int *i, char *input);
 void	skip_space(char *input, int *j);
-void	push_cmd(t_utils *utils, t_cmds *cmd);
+void	push_cmd(t_data *data, t_cmds *cmd);
 
 int		check_input(char *input);
-int		sort_tokens(t_split *split, t_utils *utils);
+int		sort_tokens(t_split *split, t_data *data);
 char	**init_args(t_word *start, char *command);
-int		parse_input(t_utils *utils);
-char	*ft_getenv(char *var, t_utils *utils);
+int		parse_input(t_data *data);
+char	*ft_getenv(char *var, t_data *data);
 t_word	*init_cmd(t_word *ptr, t_cmds *new_cmd);
 char	*expand_err(char *cont, int *i);
 char	*replace_env(char *str, int *i, char *exp, int len);

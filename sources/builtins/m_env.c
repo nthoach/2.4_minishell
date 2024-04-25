@@ -6,21 +6,21 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:27 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:31:30 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:30 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
-int	m_env(t_utils *utils, t_cmds *cmds)
+int	m_env(t_data *data, t_cmds *cmds)
 {
 	int		i;
 
 	(void) cmds;
 	i = 0;
-	while (utils->envp[i])
+	while (data->envp[i])
 	{
-		ft_putendl_fd(utils->envp[i], STDOUT_FILENO);
+		ft_putendl_fd(data->envp[i], STDOUT_FILENO);
 		i++;
 	}
 	return (EXIT_SUCCESS);
@@ -72,13 +72,13 @@ char	**sort_env(char **env)
 	return (bubble_sort(sorted, i));
 }
 
-void	sorted_env(t_utils *utils)
+void	sorted_env(t_data *data)
 {
 	int		i;
 	char	**sorted;
 	char	*temp;
 
-	sorted = sort_env(utils->envp);
+	sorted = sort_env(data->envp);
 	i = 0;
 	while (sorted && sorted[i])
 	{

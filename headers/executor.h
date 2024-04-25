@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:23:48 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:23:51 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:19 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,28 +21,28 @@ int				handle_outfile(t_redir *redir);
 int				handle_open(t_redir *redir);
 
 // executor
-int				prepare_executor(t_utils *utils);
-int				executor(t_utils *utils);
+int				prepare_executor(t_data *data);
+int				executor(t_data *data);
 int				pipe_wait(int *pid, int amount);
 int				exec_error(char *str, int code);
 
 // handle_cmd
-int				find_cmd(t_cmds *cmd, t_utils *utils);
-void			handle_cmd(t_cmds *cmd, t_utils *utils);
-void			dup_cmd(t_cmds *cmd, t_utils *utils,
+int				find_cmd(t_cmds *cmd, t_data *data);
+void			handle_cmd(t_cmds *cmd, t_data *data);
+void			dup_cmd(t_cmds *cmd, t_data *data,
 					int end[2], int fd_in);
-void			single_cmd(t_cmds *cmd, t_utils *utils);
-int				loop_paths(t_utils *utils, t_cmds *cmd);
+void			single_cmd(t_cmds *cmd, t_data *data);
+int				loop_paths(t_data *data, t_cmds *cmd);
 int				find_exec_error(char *cmd, int code);
 int				is_directory(char *path);
 
 // heredoc
-int				send_heredoc(t_utils *utils, t_cmds *cmd);
+int				send_heredoc(t_data *data, t_cmds *cmd);
 
-//executor_utils
+//executor_data
 int				check_redir_helper(int type, t_redir *dir);
 
-//exec_utils
+//exec_data
 int				find_cmd_helper(t_cmds *cmd);
 
 #endif

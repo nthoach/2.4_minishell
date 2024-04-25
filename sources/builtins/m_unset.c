@@ -6,11 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:57 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:32:00 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 17:48:35 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
-#include "../../includes/minishell.h"
+#include "../../headers/minishell.h"
 
 char	**whileloop_del_var(char **arr, char **rtn, char *str)
 {
@@ -71,7 +71,7 @@ int	unset_error(t_cmds *cmds)
 	return (EXIT_SUCCESS);
 }
 
-int	m_unset(t_utils *utils, t_cmds *cmds)
+int	m_unset(t_data *data, t_cmds *cmds)
 {
 	char	**tmp;
 
@@ -81,9 +81,9 @@ int	m_unset(t_utils *utils, t_cmds *cmds)
 		return (EXIT_FAILURE);
 	else
 	{
-		tmp = del_var(utils->envp, cmds->args[1]);
-		free_double_ptr((void **) utils->envp);
-		utils->envp = tmp;
+		tmp = del_var(data->envp, cmds->args[1]);
+		free_double_ptr((void **) data->envp);
+		data->envp = tmp;
 	}
 	return (EXIT_SUCCESS);
 }
