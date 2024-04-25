@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:07:47 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -27,7 +27,7 @@ int	sort_tokens(t_split *split, t_data *data)
 		ptr = init_cmd(ptr, new_cmd);
 		if (!new_cmd || !new_cmd->args)
 			return (0);
-		push_cmd(data, new_cmd); //push cmd into list
+		push_cmd(data, new_cmd);
 		if (ptr && ptr->type == PIPE)
 			ptr = ptr->next;
 	}
@@ -47,25 +47,6 @@ int	count_pipes(t_data *data)
 		count++;
 	}
 	return (count - 1);
-}
-
-// checks input and parses to a util struct
-// check_input invalid with ';' '&' '\'
-// split_input 
-int	parse_input(t_data *data)
-{
-	t_split	*split;
-	int		sorted;
-
-	if (!check_input(data->input)) // check 4 cases of errors: open quote ; & '\'
-		return (0); // 0 = error
-	split = split_input(data->input, data);// make linked list t_split
-	if (!split)
-		return (0);
-	sorted = sort_tokens(split, data); //
-	free_split(split);
-	data->pipes = count_pipes(data);
-	return (sorted);
 }
 
 // print data for visualization
@@ -108,4 +89,23 @@ int	count_args(t_word *start, char *command)
 	if (!command)
 		count --;
 	return (count);
+}
+
+// checks input and parses to a data struct
+// check_input invalid with ';' '&' '\'
+// split_input 
+int	parse_input(t_data *data)
+{
+	t_split	*split;
+	int		sorted;
+
+	if (!check_input(data->input))
+		return (0);
+	split = split_input(data->input, data);
+	if (!split)
+		return (0);
+	sorted = sort_tokens(split, data);
+	free_split(split);
+	data->pipes = count_pipes(data);
+	return (sorted);
 }

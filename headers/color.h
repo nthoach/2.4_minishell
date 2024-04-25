@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:22:58 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/23 21:22:59 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/04/25 21:08:50 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -41,7 +41,7 @@
 # define MAGENTA_BOLD 	"\033[1;35m"
 # define CYAN_BOLD    	"\033[1;36m"
 # define WHITE_BOLD   	"\033[1;37m"
-# define WELCOME_MSG "hello"
+# define WELCOME_MSG	"Welcome to minishell"
 # define HEREDOC_MSG	"\033[1;34m> \033[0m"
 
 # define READLINE_MSG	"\e[38;5;212mminishell\033[34m$ \033[0m"

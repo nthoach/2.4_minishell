@@ -6,7 +6,7 @@
 #    By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 16:32:48 by nthoach           #+#    #+#              #
-#    Updated: 2024/04/25 17:50:51 by nthoach          ###   ########.fr        #
+#    Updated: 2024/04/25 20:55:32 by nthoach          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -72,10 +72,10 @@ INCL = ./
 CC = cc
 
 $(NAME): $(OBJS) $(OBJ_DIR)
-	ar -rcs $(NAME) $(OBJS)
+	@ar -rcs $(NAME) $(OBJS)
 
 $(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) -c $(CFLAGS) -I$(INCL) $< -o $@
+	@$(CC) -c $(CFLAGS) -I$(INCL) $< -o $@
 
 $(OBJ_DIR):
 	mkdir -p $@

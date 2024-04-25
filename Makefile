@@ -74,35 +74,35 @@ $(NAME): $(LIBFT) $(OBJS) $(PATHO)
 	@$(CC) $(FLAGS) $(LIBFT) $(OBJS) $(READLINE_LIB) -o $(NAME)
 
 $(PATHO)%.o:: $(PATHSP)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}								in	$(PATHSP)${END}"
+	@echo "Compiling ${notdir $<}					in	$(PATHSP)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHS)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}								in	$(PATHS)${END}"
+	@echo "Compiling ${notdir $<}					in	$(PATHS)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSL)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}								in	$(PATHSL)${END}"
+	@echo "Compiling ${notdir $<}					in	$(PATHSL)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSB)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}								in	$(PATHSB)${END}"
+	@echo "Compiling ${notdir $<}					in	$(PATHSB)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSU)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}								in	$(PATHSU)${END}"
+	@echo "Compiling ${notdir $<}					in	$(PATHSU)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHSE)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}								in	$(PATHSE)${END}"
+	@echo "Compiling ${notdir $<}			in	$(PATHSE)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHEX)%.c $(HEADERS)
-	@echo "${notdir $<}											in	$(PATHEX)${END}"
+	@echo "${notdir $<}						in	$(PATHEX)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHINI)%.c $(HEADERS)
-	@echo "${notdir $<}											in	$(PATHINI)${END}"
+	@echo "${notdir $<}						in	$(PATHINI)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(LIBFT):

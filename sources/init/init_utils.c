@@ -25,5 +25,4 @@ void	ini1_data(t_data *data, char **envp)
 	if (*envp != 0)
 		data->envp = ft_arrdup(envp);
 	find_pwd(data);
-	printf("\n%s\n\n", WELCOME_MSG);
 }
