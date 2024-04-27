@@ -1,30 +1,31 @@
 # Minishell
-This 42 project is a simplified version of a Unix shell. It provides a command-line interface where users can execute various commands and manage processes. The project focuses on parsing and executing commands, handling environment variables, and providing basic shell functionalities.
+This 42 project serves as a streamlined emulation of a Unix shell. It furnishes users with a command-line interface for executing diverse commands and overseeing processes. The project emphasizes parsing and executing commands, managing environment variables, and delivering fundamental shell capabilities.
 
 ## Features
-- Command-line interface with a prompt for user input
-- Command parsing and execution
-- Support for built-in shell commands
-- Environment variable management
-- Input/output redirection and piping
-- Signal handling and process management
+- Console interface with a prompt for user interaction
+- Parsing and execution of commands
+- Integration of internal shell commands
+- Oversight of environment variables
+- Direction of input/output and implementation of pipelines
+- Management of signals and supervision of processes
+
 ### Not Supported
 - ';', '&&', or '||'
 
 ## Prerequisites
-- To make sure the correct path for your readline by editing the following line in the Makefile
+- To ensure the accurate path for your readline library, modify the line below in the Makefile
 
 READLINE_DIR = "/opt/homebrew/Cellar/readline/8.2.10"
 
 ## Installation
 1. Clone the repository  
   `git clone https://github.com/nthoach/2.4_minishell.git`  
-2. Navigate to the directory  
+2. Go to the directory  
   `cd minishell`  
 3. Compile the minishell  
    `make`
 
 ## Usage
-Start the minishell using the following command:  
+Launch the minishell with the following command:  
 `./minishell`  
-This launches the minishell and displays a prompt where you can enter commands.
+Executing this command initiates the minishell and presents a prompt, enabling you to input commands.
