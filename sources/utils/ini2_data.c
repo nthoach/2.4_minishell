@@ -46,7 +46,7 @@ void	free_cmd(t_cmds *cmd)
 }
 
 // resets data variables
-int	reset_data(t_data *data)
+int	free2_data(t_data *data)
 {
 	t_cmds	*ptr;
 	t_cmds	*del;
@@ -67,8 +67,8 @@ int	reset_data(t_data *data)
 	return (1);
 }
 
-// free memory on exit
-void	free_data(t_data *data)
+// free pwd, old_pwd, envp
+void	free1_data(t_data *data)
 {
 	if (data->pwd)
 		free(data->pwd);

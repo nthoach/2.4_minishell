@@ -1,12 +1,12 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds_handler.c                                     :+:      :+:    :+:   */
+/*   single_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:32 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:40 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 21:35:16 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -103,21 +103,21 @@ void	handle_cmd(t_cmds *cmd, t_data *data)
 	exit_code = 0;
 	if (cmd->redirections && check_redirections(cmd))
 	{
-		reset_data(data);
-		free_data(data);
+		free2_data(data);
+		free1_data(data);
 		exit(1);
 	}
 	if (cmd->builtin != NULL)
 	{
 		exit_code = cmd->builtin(data, cmd);//run built-in
-		reset_data(data);
-		free_data(data);
+		free2_data(data);
+		free1_data(data);
 		exit(exit_code);
 	}
 	else if (cmd->command)
 		exit_code = find_cmd(cmd, data); //find cmd and run
-	reset_data(data);
-	free_data(data);
+	free2_data(data);
+	free1_data(data);
 	exit(exit_code);
 }
 

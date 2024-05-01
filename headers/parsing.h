@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:25:15 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 22:05:49 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:34:10 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -76,7 +76,7 @@ void	skip_quotes(int *i, char *input);
 void	skip_space(char *input, int *j);
 void	push_cmd(t_data *data, t_cmds *cmd);
 
-int		check_input(char *input);
+int		valid_input(char *input);
 int		split2cmds(t_split *split, t_data *data);
 char	**init_args(t_word *start, char *command);
 int		parse_all(t_data *data);

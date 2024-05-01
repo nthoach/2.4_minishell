@@ -19,7 +19,7 @@
 int		ini2_data(t_data *data);
 char	**ft_arrdup(char **arr);
 
-void	free_data(t_data *data);
+void	free1_data(t_data *data);
 void	ini1_data(t_data *data, char **envp);
 
 #endif

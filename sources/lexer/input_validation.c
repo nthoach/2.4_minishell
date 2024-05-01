@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:37:00 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -24,7 +24,8 @@ static int	invalid_char(char *input, char c)
 	i = 0;
 	while (i < len)
 	{
-		skip_space(input, &i);
+		while (input[i] && is_space(input[i]))
+			i++;
 		if (input[i] && is_quote(input[i]))
 			skip_quotes(&i, input);
 		if (input[i] && input[i] == c)
@@ -65,7 +66,7 @@ static int	open_quotes(char *input)
 }
 
 // checks for basic input issues
-int	check_input(char *input)
+int	valid_input(char *input)
 {
 	if (open_quotes(input))
 		return (!ft_error(2));

@@ -51,15 +51,3 @@ void	skip_quotes(int *i, char *input)
 	if (input[*i] && input[*i] == quote)
 		(*i) = (*i) + 1;
 }
-
-//if input[i] is a space, we jump i to the input[i] character
-// that is not a space or 0 if end of array
-void	skip_space(char *input, int *j)
-{
-	int	i;
-
-	i = *j;
-	while (input[i] && is_space(input[i]))
-		i++;
-	*j = i;
-}

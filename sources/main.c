@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:45 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 22:00:34 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:09:35 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -21,20 +21,20 @@ void	minishell_loop(t_data *data)
 		ini2_data(data);
 		if (!data->input) 
 		{
-			reset_data(data);
-			free_data(data);
+			free2_data(data);
+			free1_data(data);
 			printf("exit\n");
 			exit(EXIT_SUCCESS);
 		}
 		else if (data->input[0] == '\0')
 		{
-			reset_data(data);
+			free2_data(data);
 			continue ;
 		}
 		add_history(data->input);
 		if (parse_all(data))
 			exec_all(data);
-		reset_data(data);
+		free2_data(data);
 	}
 }
 
@@ -48,9 +48,8 @@ int	main(int argc, char **argv, char **envp)
 		printf("just run:'./minishell' !! No argument needed !!\n");
 		exit(0);
 	}
-	init_signals();
 	ini1_data(&data, envp);
 	minishell_loop(&data);
-	free_data(&data);
+	free1_data(&data);
 	return (0);
 }

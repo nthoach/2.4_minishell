@@ -15,7 +15,7 @@ PATHEX = sources/executor/
 PATHINI = sources/init/
 
 sources	=	sources/main.c \
-		sources/init/init_signals.c \
+		sources/init/signals.c \
 		sources/init/ini1_data.c \
 		sources/builtins/builtins.c \
 		sources/builtins/m_cd.c \

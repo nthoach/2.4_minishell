@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:05 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:36 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 21:35:16 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -55,8 +55,8 @@ void	p_exit(t_data *data, t_cmds *cmds)
 		exit_code = ft_atoi(cmds->args[1]);
 	else
 		exit_code = 255;
-	reset_data(data);
-	free_data(data);
+	free2_data(data);
+	free1_data(data);
 	exit(exit_code);
 }
 

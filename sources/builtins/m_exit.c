@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:35 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:31 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:30:50 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -67,13 +67,13 @@ int	m_exit(t_data *data, t_cmds *cmds)
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
 		ft_putstr_fd(cmds->args[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
-		reset_data(data);
-		free_data(data);
+		free2_data(data);
+		free1_data(data);
 		exit(255);
 	}
 	str = ft_arrdup(cmds->args);
-	reset_data(data);
-	free_data(data);
+	free2_data(data);
+	free1_data(data);
 	determine_exit_code(str);
 	return (EXIT_SUCCESS);
 }

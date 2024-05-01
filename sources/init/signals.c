@@ -1,12 +1,12 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_signal.c                                      :+:      :+:    :+:   */
+/*   init_signals.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:55 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:39:17 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 21:28:15 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -59,10 +59,3 @@ void	sigquit_handler(int sig)
 	}
 }
 
-void	init_signals(void)
-{
-	rl_catch_signals = 0;
-	rl_event_hook = event;
-	signal(SIGINT, sigint_handler);
-	signal(SIGQUIT, sigquit_handler);
-}

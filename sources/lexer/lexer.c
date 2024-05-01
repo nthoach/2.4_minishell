@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:25 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 22:18:59 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:27:51 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -39,10 +39,11 @@ int	input2words(char *input, t_split *split)
 	i = 0;
 	while (input[i])
 	{
-		skip_space(input, &i);
+		while (input[i] && is_space(input[i]))
+			i++;
 		if (input[i])
 		{
-			if (!define_word(input, &i, split))
+			if (define_word(input, &i, split) == 0)
 				return (0);
 		}
 	}
@@ -61,7 +62,7 @@ t_split	*input2split(char *input, t_data *data)
 		ft_error(1);
 		return (0);
 	}
-	if (!input2words(input, split) || !check_split(split))
+	if (input2words(input, split) == 0 || check_split(split) == 0)
 	{
 		free_split(split);
 		return (0);

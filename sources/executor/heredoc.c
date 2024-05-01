@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:13 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:49:05 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 21:35:16 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -154,7 +154,7 @@ ft_heredoc function is stored in the sl variable
 if the ft_heredoc function returns a
 non-zero value (EXIT_FAILURE), it sets
 g_global.error_num to 1 to indicate
-an error and returns reset_data(data).
+an error and returns free2_data(data).
 This is done to handle any failure
 during here document processing.
 */

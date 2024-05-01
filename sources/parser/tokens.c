@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:14 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:30:20 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -107,7 +107,7 @@ static int	add_str(t_split *split, char *input, int *i)
 	return (1);
 }
 
-// calls the correct function to add word
+// define: PIPE, REDIR, QUOTE, STR
 int	define_word(char *input, int *i, t_split *split)
 {
 	int	success;

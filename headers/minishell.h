@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:25:10 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:51:15 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:27:33 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -36,10 +36,10 @@
 
 int		parse_envp(t_data *data);
 int		find_pwd(t_data *data);
-int		reset_data(t_data *data);
+int		free2_data(t_data *data);
+int		event(void);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
-void	init_signals(void);
 char	**add_var(char **arr, char *str);
 
 char	*delete_quotes_value(char *str);

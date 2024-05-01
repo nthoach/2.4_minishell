@@ -14,6 +14,10 @@
 
 void	ini1_data(t_data *data, char **envp)
 {
+	rl_catch_signals = 0;
+	rl_event_hook = event;
+	signal(SIGINT, sigint_handler);
+	signal(SIGQUIT, sigquit_handler);
 	data->cmds = 0;
 	data->paths = 0;
 	data->pwd = 0;

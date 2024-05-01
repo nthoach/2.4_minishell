@@ -1,12 +1,12 @@
 /******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   error_all.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:22 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:39 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 21:35:16 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -87,6 +87,6 @@ int	token_error(t_data *data, int code)
 	else
 		ft_putstr_fd("\n", STDERR_FILENO);
 	if (data)
-		reset_data(data);
+		free2_data(data);
 	return (EXIT_FAILURE);
 }
