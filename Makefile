@@ -39,7 +39,7 @@ sources	=	sources/main.c \
 		sources/lexer/input_validation.c \
 		sources/lexer/lexer.c \
 		sources/lexer/lexer_utils.c \
-		sources/lexer/lexer_validation.c \
+		sources/lexer/valid_split.c \
 		sources/lexer/symbol_utils.c \
 		sources/lexer/expand_env.c \
 		sources/lexer/combine_quotes.c \

@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:25 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 22:27:51 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:54:16 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -62,12 +62,12 @@ t_split	*input2split(char *input, t_data *data)
 		ft_error(1);
 		return (0);
 	}
-	if (input2words(input, split) == 0 || check_split(split) == 0)
+	if (input2words(input, split) == 0 || valid_split(split) == 0)
 	{
 		free_split(split);
 		return (0);
 	}
-	if (!expand_env(split, data) || !combine_quotes(split))
+	if (expand_env(split, data) == 0 || combine_quotes(split) == 0)
 	{
 		free_split(split);
 		return (0);
@@ -76,7 +76,6 @@ t_split	*input2split(char *input, t_data *data)
 	return (split);
 }
 
-// sorts the type of word
 void	label_word(t_split *split)
 {
 	t_word	*ptr;

@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:13 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 21:35:16 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 23:00:36 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -18,18 +18,6 @@ int	display_error(int errorCode)
 	return (EXIT_FAILURE);
 }
 
-/*It opens the file using open with the
-O_CREAT, O_RDWR, and O_TRUNC flags,
- creates a loop that reads input lines
- until the here document's end condition is met
- (either when the user enters the same line
- as the here document or
- when the global flag g_global.CTRL_C
- is set to true).
- Here I am writing the line to the file
- opened using write function
- passing newline to separate the input from the user.
-*/
 int	create_heredoc(t_redir *heredoc, char *file_name)
 {
 	int		fd;
@@ -57,29 +45,6 @@ int	create_heredoc(t_redir *heredoc, char *file_name)
 	return (EXIT_SUCCESS);
 }
 
-/*
-g_global.CTRL_C = 0;
-This flag is used to control the termination
-condition of the here document loop in the
-create_heredoc function. When this flag is
-set to a non-zero value,
-the loop in create_heredoc will exit,
-stopping the creation of the here document.
-
-g_global.in_heredoc = 1;
-This flag is used to control the termination
-condition of the here document loop in the
-create_heredoc function. When this flag is
-set to a non-zero value,
-the loop in create_heredoc will exit,
-stopping the creation of the here document.
-
-This flag is used to indicate whether the
-program is currently inside a here document.
-It is set to 1 (true) when entering the
-ft_heredoc function and creating a
-here document, and set back to 0 (false)
-*/
 int	ft_heredoc(t_data *data, t_redir *heredoc, char *file_name)
 {
 	int		sl;
@@ -93,12 +58,6 @@ int	ft_heredoc(t_data *data, t_redir *heredoc, char *file_name)
 	return (sl);
 }
 
-/*
-generates a unique filename for the here document file.
-It uses a static variable i to keep track of the number of generated filenames.
-The function converts i to a string and appends it to the prefix
-"build/.tmp_heredoc_file_". It then returns the generated filename.
-*/
 char	*generate_heredoc_filename(void)
 {
 	static int	i = 0;
@@ -111,53 +70,6 @@ char	*generate_heredoc_filename(void)
 	return (file_name);
 }
 
-/*
-It starts by saving the initial value of
-"cmd->redirection" in the variable
-"start". This is done to ensure that the
-'cmd->redirection' pionter is reset
-to the beginning of the list.
-
-Initializes the variable sl to EXIT_SUCCESS.
-This variable will store the success or
-failure status of the ft_heredoc function,
-which is called for each here document.
-
-Inside the loop, it checks if the current
-redirection token
-is LESS_LESS, indicating a here document.
-
-It frees the previously stored
-'cmd->hd_file_name' (if any)
-to avoid memory leaks
-
-if (cmd->hd_file_name)
-	free(cmd->hd_file_name); */
-/*
-It generates a new uniques filename
-for the here document file using the
-generate_heredoc_filename funciton
-and assigns it to 'cmd->hd_file_name'
-*/
-/*
-It calls the ft_heredoc function to
-create the here document. The ft_heredoc
-function handles the processing of a
-single here document, and it is called
-with the data pointer, the current
-redirection (cmd->redirections), and
-the generated filename (cmd->hd_file_name)
-as arguments. The result of the
-ft_heredoc function is stored in the sl variable
-*/
-/*
-if the ft_heredoc function returns a
-non-zero value (EXIT_FAILURE), it sets
-g_global.error_num to 1 to indicate
-an error and returns free2_data(data).
-This is done to handle any failure
-during here document processing.
-*/
 int	send_heredoc(t_data *data, t_cmds *cmd)
 {
 	t_redir	*redir;
@@ -171,9 +83,7 @@ int	send_heredoc(t_data *data, t_cmds *cmd)
 		{
 			if (cmd->hd_file_name)
 				free (cmd->hd_file_name);
-			//standard name with number of order
 			cmd->hd_file_name = generate_heredoc_filename();
-			//write contents of heredoc file, set parameters for data, cmd
 			sl = ft_heredoc(data, redir, cmd->hd_file_name);
 			if (sl)
 				return (EXIT_FAILURE);

@@ -6,14 +6,14 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:11 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 22:42:53 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../../headers/minishell.h"
 
 //checks for issues in input structure
-int	check_split(t_split *split)
+int	valid_split(t_split *split)
 {
 	t_word	*ptr;
 

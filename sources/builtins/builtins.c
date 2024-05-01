@@ -6,14 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:02 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:27 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 23:04:18 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../../headers/minishell.h"
-
-// it accepts *str, and returns function pointer
-// if there is no much it returns null.
 
 int	(*builtin_arr(char *str))(t_data *data, t_cmds *cmds)
 {

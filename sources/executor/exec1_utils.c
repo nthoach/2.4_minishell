@@ -23,14 +23,14 @@ int	find_cmd_helper(t_cmds *cmd)
 	else
 		tmp = ft_strdup(tmp1);
 	free(tmp1);
-	if (!access(tmp, F_OK)) //command file exist but end with '\'
+	if (!access(tmp, F_OK))
 	{
 		free(tmp);
-		return (exec_error(cmd->command, 2)); //why?? return (0) instead
+		return (exec_error(cmd->command, 2));
 	}
-	else //command file is not exist
+	else
 	{
 		free(tmp);
-		return (exec_error(cmd->command, 1)); // no file or directory
+		return (exec_error(cmd->command, 1));
 	}
 }

@@ -6,14 +6,12 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:49 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:32 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 23:03:02 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../../headers/minishell.h"
 
-/*It will just display data->pwd in stadard out fileno
-*/
 int	m_pwd(t_data *data, t_cmds *cmds)
 {
 	(void) cmds;

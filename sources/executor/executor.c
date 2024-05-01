@@ -6,20 +6,11 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:03 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 21:20:49 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 23:01:12 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
 #include "../../headers/minishell.h"
-
-// pipe_wait: This function waits for child processes to complete execution
-// when multiple pipes are used. It takes an
-// array of process IDs (pid) and the number of
-// processes (amount) as arguments. It iterates over the array of process
-// IDs and waits for each child process to exit using waitpid.
-//  After all child processes have exited, it checks the exit
-// status using WIFEXITED and sets the global g_global.error_num
-// to the exit status of the last child process. It returns EXIT_SUCCESS.
 
 int	pipe_wait(int *pid, int amount)
 {
@@ -42,17 +33,6 @@ int	pipe_wait(int *pid, int amount)
 	return (EXIT_SUCCESS);
 }
 
-// ft_fork: This function is responsible for forking a
-// child process and executing the command. It takes a t_data pointer,
-// an array of
-// pipe file descriptors (end), the input file descriptor (fd_in),
-// and a t_cmds pointer as arguments. It first checks if the data->reset
-// flag is set and resets the static variable i if necessary.
-// Then, it forks a child process using fork and assigns the process ID to
-// data->pid[i]. If the fork fails, it calls ft_error to handle the error.
-//  In the child process, it calls the dup_cmd function to
-// set up the necessary file descriptors and execute the command.
-// Finally, it increments i and returns EXIT_SUCCESS.
 int	ft_fork(t_data *data, int end[2], int fd_in, t_cmds *cmd)
 {
 	static int	i = 0;
@@ -70,17 +50,6 @@ int	ft_fork(t_data *data, int end[2], int fd_in, t_cmds *cmd)
 	i++;
 	return (EXIT_SUCCESS);
 }
-/*
-check_fd_heredoc: This function checks the file
-descriptor for input redirection. It takes a t_data pointer,
-an array of pipe file descriptors (end), and a t_cmds pointer
-as arguments. If the data->heredoc flag is set,
-indicating the use of a here document, it closes
-the read end of the pipe (end[0]), opens the here document
-file in read-only mode, and returns the file descriptor.
-Otherwise, it returns end[0], which represents the
-standard input file descriptor.
-*/
 
 int	check_fd_heredoc(t_data *data, int end[2], t_cmds *cmd)
 {

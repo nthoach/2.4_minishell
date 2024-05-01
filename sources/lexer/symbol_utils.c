@@ -12,7 +12,6 @@
 
 #include "../../headers/minishell.h"
 
-//checks if character is a space
 int	is_space(char c)
 {
 	if (c == ' ' || c == '\t' || c == '\n')
@@ -22,7 +21,6 @@ int	is_space(char c)
 	return (0);
 }
 
-//checks if character is a quote
 int	is_quote(char c)
 {
 	if (c == '\'' || c == '"')
@@ -30,7 +28,7 @@ int	is_quote(char c)
 	return (0);
 }
 
-//checks if character is a marker symbol
+
 int	is_symbol(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
@@ -38,8 +36,7 @@ int	is_symbol(char c)
 	return (0);
 }
 
-//if input[i] is a quote, we jump i to the input[i] character
-// after the close of the quote
+
 void	skip_quotes(int *i, char *input)
 {
 	int	quote;

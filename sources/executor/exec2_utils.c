@@ -11,24 +11,7 @@
 /******************************************************************************/
 
 #include "../../headers/minishell.h"
-/*
-It takes two arguments: split_str, which is an array of strings,
- and new_str, which is a string.
-It initializes a variable tmp with a duplicate of the first
-string in split_str (split_str[0]).
-It then enters a loop starting from index 1 and
-iterates through the split_str array.
-In each iteration, it assigns tmp to new_str, and then
-joins new_str with a space character using ft_strjoin to
-create add_space.
-It frees the memory allocated for new_str, assigns tmp
-to add_space using ft_strjoin to concatenate add_space
-with the current string in split_str[i], and frees the
-memory allocated for add_space.
-The loop continues until all elements of split_str have
-been processed.
-Finally, it assigns tmp to new_str and returns new_str.
-*/
+
 char	*join_split_str(char **split_str, char *new_str)
 {
 	char	*tmp;
@@ -126,7 +109,7 @@ int	is_directory(char *path)
 	DIR	*dir;
 
 	dir = opendir(path);
-	if (!dir) //NULL == cannot open
+	if (!dir)
 		return (0);
 	else
 	{

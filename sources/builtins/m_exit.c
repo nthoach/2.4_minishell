@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:35 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 22:30:50 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/01 23:03:09 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -49,8 +49,6 @@ void	determine_exit_code(char **str)
 	exit(exit_code);
 }
 
-// This check if the exit function has more that two arguments
-// free before you determine the exit_code and exit
 int	m_exit(t_data *data, t_cmds *cmds)
 {
 	char	**str;
