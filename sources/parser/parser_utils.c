@@ -12,7 +12,6 @@
 
 #include "../../headers/minishell.h"
 
-// initializes a cmd struct
 t_word	*init_cmd(t_word *start, t_cmds *new_cmd)
 {
 	t_word	*ptr;
@@ -34,7 +33,6 @@ t_word	*init_cmd(t_word *start, t_cmds *new_cmd)
 	return (ptr);
 }
 
-// ints the argument list
 char	**init_args(t_word *start, char *command)
 {
 	t_word	*ptr;
@@ -58,7 +56,6 @@ char	**init_args(t_word *start, char *command)
 	return (args);
 }
 
-// pushed command to list
 void	push_cmd(t_data *data, t_cmds *cmd)
 {
 	t_cmds	*ptr;
@@ -78,7 +75,6 @@ void	push_cmd(t_data *data, t_cmds *cmd)
 	}
 }
 
-// returns value of the variable var in data.envp
 char	*ft_getenv(char *var, t_data *data)
 {
 	int		i;
@@ -108,7 +104,6 @@ char	*ft_getenv(char *var, t_data *data)
 	return (ft_strdup(""));
 }
 
-// replace $? with the error code
 char	*expand_err(char *cont, int *i)
 {
 	char	*err;

@@ -77,7 +77,6 @@ void	free1_data(t_data *data)
 	free_double_ptr((void **) data->envp);
 }
 
-// duplicates the passed string
 char	**ft_arrdup(char **arr)
 {
 	char	**rtn;

@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 21:52:28 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:14:41 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -50,28 +50,28 @@ int	count_pipes(t_data *data)
 }
 
 // print data for visualization
-void	print_data(t_data *data)
-{
-	t_cmds	*c_ptr;
-	int		i;
-	t_redir	*r_ptr;
+// void	print_data(t_data *data)
+// {
+// 	t_cmds	*c_ptr;
+// 	int		i;
+// 	t_redir	*r_ptr;
 
-	c_ptr = data->cmds;
-	while (c_ptr)
-	{
-		printf("cmd: %s\n", c_ptr->command);
-		i = 0;
-		while (c_ptr->args[i])
-			printf("arg: %s\n", c_ptr->args[i++]);
-		r_ptr = c_ptr->redirections;
-		while (r_ptr)
-		{
-			printf("%i - %s\n", r_ptr->type, r_ptr->path);
-			r_ptr = r_ptr->next;
-		}
-		c_ptr = c_ptr->next;
-	}
-}
+// 	c_ptr = data->cmds;
+// 	while (c_ptr)
+// 	{
+// 		printf("cmd: %s\n", c_ptr->command);
+// 		i = 0;
+// 		while (c_ptr->args[i])
+// 			printf("arg: %s\n", c_ptr->args[i++]);
+// 		r_ptr = c_ptr->redirections;
+// 		while (r_ptr)
+// 		{
+// 			printf("%i - %s\n", r_ptr->type, r_ptr->path);
+// 			r_ptr = r_ptr->next;
+// 		}
+// 		c_ptr = c_ptr->next;
+// 	}
+// }
 
 int	count_args(t_word *start, char *command)
 {

@@ -6,7 +6,7 @@
 /*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:45 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 22:09:35 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/07 08:08:20 by nthoach          ###   ########.fr       */
 /*                                                                            */
 /******************************************************************************/
 
@@ -19,7 +19,7 @@ void	minishell_loop(t_data *data)
 	{
 		data->input = readline(READLINE_MSG);
 		ini2_data(data);
-		if (!data->input) 
+		if (data->input == 0) 
 		{
 			free2_data(data);
 			free1_data(data);
