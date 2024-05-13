@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   m_unset.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:57 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:35 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:04:50 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -28,7 +28,7 @@ char	**whileloop_del_var(char **arr, char **rtn, char *str)
 			rtn[j] = ft_strdup(arr[i]);
 			if (rtn[j] == NULL)
 			{
-				free_double_ptr((void **) rtn);
+				free_double_ptr((void **)rtn);
 				return (rtn);
 			}
 			j++;
@@ -82,7 +82,7 @@ int	m_unset(t_data *data, t_cmds *cmds)
 	else
 	{
 		tmp = del_var(data->envp, cmds->args[1]);
-		free_double_ptr((void **) data->envp);
+		free_double_ptr((void **)data->envp);
 		data->envp = tmp;
 	}
 	return (EXIT_SUCCESS);

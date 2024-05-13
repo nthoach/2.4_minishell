@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   single_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:32 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 22:58:33 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:10:36 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -25,22 +25,20 @@ int	find_exec_error(char *cmd, int code)
 	if (code == 2)
 	{
 		temp = ft_substr(cmd, 0, ft_strlen(cmd) - 2);
-		if (cmd[ft_strlen(cmd) - 1] == '/'
-			&& access(temp, F_OK))
+		if (cmd[ft_strlen(cmd) - 1] == '/' && access(temp, F_OK))
 		{
-			free (temp);
+			free(temp);
 			return (exec_error(cmd, 2));
 		}
-		free (temp);
-		if (cmd[ft_strlen(cmd) - 1] != '/'
-					&& access(cmd, F_OK))
+		free(temp);
+		if (cmd[ft_strlen(cmd) - 1] != '/' && access(cmd, F_OK))
 			return (exec_error(cmd, 1));
 	}
 	return (exec_error(cmd, 0));
 }
 
 /*
-*/
+ */
 int	find_cmd(t_cmds *cmd, t_data *data)
 {
 	if (ft_strlen(cmd->command) == 0)
@@ -62,7 +60,7 @@ int	find_cmd(t_cmds *cmd, t_data *data)
 		execve(cmd->command, cmd->args, data->envp);
 	}
 	else if (access(cmd->command, F_OK))
-		return (find_exec_error(cmd->command, 1)); 
+		return (find_exec_error(cmd->command, 1));
 	return (find_exec_error(cmd->command, 0));
 }
 
@@ -92,7 +90,7 @@ void	handle_cmd(t_cmds *cmd, t_data *data)
 }
 
 /*
-*/
+ */
 void	dup_cmd(t_cmds *cmd, t_data *data, int end[2], int fd_in)
 {
 	if (cmd->prev && dup2(fd_in, STDIN_FILENO) < 0)
@@ -107,7 +105,7 @@ void	dup_cmd(t_cmds *cmd, t_data *data, int end[2], int fd_in)
 }
 
 /*
-*/
+ */
 void	single_cmd(t_cmds *cmd, t_data *data)
 {
 	int	pid;
@@ -121,7 +119,7 @@ void	single_cmd(t_cmds *cmd, t_data *data)
 	if (pid < 0)
 		ft_error(5);
 	else if (pid == 0)
-		handle_cmd(cmd, data); 
+		handle_cmd(cmd, data);
 	if (cmd->builtin == m_export || cmd->builtin == m_cd
 		|| cmd->builtin == m_exit || cmd->builtin == m_unset)
 		p_builtins(data, cmd);

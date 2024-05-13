@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_data.c                                     :+:      :+:    :+:   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:34:45 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
+/*   Created: 2024/05/13 17:11:41 by honguyen          #+#    #+#             */
+/*   Updated: 2024/05/13 17:11:44 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -96,10 +96,10 @@ char	*ft_getenv(char *var, t_data *data)
 				ret = ft_strdup(value[1]);
 			else
 				ret = ft_calloc(1, sizeof(char));
-			free_double_ptr((void **) value);
+			free_double_ptr((void **)value);
 			return (ret);
 		}
-		free_double_ptr((void **) value);
+		free_double_ptr((void **)value);
 	}
 	return (ft_strdup(""));
 }

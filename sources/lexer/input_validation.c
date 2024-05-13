@@ -1,24 +1,24 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   input_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 22:37:00 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:11:00 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 // checks if char is present in string
 static int	invalid_char(char *input, char c)
 {
-	int		i;
-	int		len;
+	int	i;
+	int	len;
 
-	len = (int) ft_strlen(input);
+	len = (int)ft_strlen(input);
 	if (!ft_strchr(input, c))
 		return (0);
 	i = 0;
@@ -35,7 +35,7 @@ static int	invalid_char(char *input, char c)
 	return (0);
 }
 
-//checks if this string has open/invalid quotes
+// checks if this string has open/invalid quotes
 static int	open_quotes(char *input)
 {
 	int	open;

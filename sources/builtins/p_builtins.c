@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   p_builtins.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:05 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 21:35:16 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:13:24 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -18,15 +18,14 @@ void	p_export(t_data *data, t_cmds *cmds)
 	int		i;
 
 	i = 1;
-	if (!cmds->args[1] || cmds->args[1][0] == '\0') //cmds->arg[0] == cmd, 
+	if (!cmds->args[1] || cmds->args[1][0] == '\0')
 		return ;
 	else
 	{
 		while (cmds->args[i])
 		{
-			if (!check_parameter(cmds->args[i])
-				&& !variable_exist(data, cmds->args[i])
-				&& !invalid_identifier(cmds->args[i], 1))
+			if (!check_parameter(cmds->args[i]) && !variable_exist(data,
+					cmds->args[i]) && !invalid_identifier(cmds->args[i], 1))
 			{
 				tmp = add_var(data->envp, cmds->args[i]);
 				free_double_ptr((void **)data->envp);
@@ -43,7 +42,7 @@ void	p_export(t_data *data, t_cmds *cmds)
 
 void	p_exit(t_data *data, t_cmds *cmds)
 {
-	int		exit_code;
+	int	exit_code;
 
 	if (cmds->args[1] && cmds->args[2] && is_str_digit(cmds->args[1]))
 		return ;
@@ -68,7 +67,7 @@ void	p_unset(t_data *data, t_cmds *cmds)
 		|| equal_sign(cmds->args[1]) != 0)
 		return ;
 	temp = del_var(data->envp, cmds->args[1]);
-	free_double_ptr((void **) data->envp);
+	free_double_ptr((void **)data->envp);
 	data->envp = temp;
 }
 

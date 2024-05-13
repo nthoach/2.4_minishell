@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   m_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:35 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 23:03:09 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:04:47 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -45,7 +45,7 @@ void	determine_exit_code(char **str)
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		exit_code = 255;
 	}
-	free_double_ptr((void **) str);
+	free_double_ptr((void **)str);
 	exit(exit_code);
 }
 

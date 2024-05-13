@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:42 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 22:29:57 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:16:44 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -19,8 +19,8 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	int		j;
 	int		k;
 
-	full = (char *)ft_calloc((ft_strlen(str) - len)
-			+ ft_strlen(exp) + 2, sizeof(char));
+	full = (char *)ft_calloc((ft_strlen(str) - len) + ft_strlen(exp) + 2,
+			sizeof(char));
 	if (!full)
 		ft_error(1);
 	j = -1;
@@ -72,15 +72,15 @@ int	found_env(char *old, int *i, t_word *word, t_data *data)
 // expands env variables except in quotes, expand_err = $?
 int	expand_env_str(t_word *word, t_data *data)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (word->cont && word->cont[i])
 	{
-		if (word->cont[i] == '$' && word->cont[i + 1]
-			&& word->cont[i + 1] == '?')
+		if (word->cont[i] == '$' && word->cont[i + 1] && word->cont[i
+				+ 1] == '?')
 			word->cont = expand_err(word->cont, &i);
-		else if (word->cont[i] == '$' && word->cont[i + 1] //??
+		else if (word->cont[i] == '$' && word->cont[i + 1]
 			&& check_valid_identifier(word->cont[i + 1]))
 			i = i + 2;
 		else if (word->cont[i] == '$' && word->cont[i + 1])
@@ -88,14 +88,6 @@ int	expand_env_str(t_word *word, t_data *data)
 			if (!found_env(word->cont, &i, word, data))
 				return (0);
 		}
-		/*// tidle ~
-		else if (word->cont[i] == '~')
-		{
-			word->cont = expand_tidle(word->cont,&i, word, data);
-		}
-	
-		// tidle ~
-		*/
 		else
 			i++;
 	}
@@ -112,11 +104,10 @@ int	expand_var_quote(t_word *word, t_data *data)
 	i = 0;
 	while (word->cont[i])
 	{
-		if (word->cont[i] == '$' && word->cont[i + 1]
-			&& word->cont[i + 1] == '?')
+		if (word->cont[i] == '$' && word->cont[i + 1] && word->cont[i
+				+ 1] == '?')
 			word->cont = expand_err(word->cont, &i);
-		else if (word->cont[i] == '$'
-			&& !found_env(word->cont, &i, word, data))
+		else if (word->cont[i] == '$' && !found_env(word->cont, &i, word, data))
 			return (0);
 		else if (word->cont[i] == '\'')
 			skip_quotes(&i, word->cont);
@@ -139,8 +130,8 @@ int	expand_env(t_split *split, t_data *data)
 	ptr = split->first;
 	while (ptr)
 	{
-		if (ptr->type == STR || ptr->type == CMD
-			|| ptr->type == ARG || ptr->type == PATH)
+		if (ptr->type == STR || ptr->type == CMD || ptr->type == ARG
+			|| ptr->type == PATH)
 			success = expand_env_str(ptr, data);
 		else if (ptr->type == QUOTE)
 			success = expand_var_quote(ptr, data);

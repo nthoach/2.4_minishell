@@ -1,29 +1,27 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   redir_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:22 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 22:59:59 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:09:17 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 /*
-*/
+ */
 int	check_append_outfile(t_redir *redir)
 {
 	int	fd;
 
 	if (redir->type == APPEND)
-		fd = open(redir->path,
-				O_CREAT | O_RDWR | O_APPEND, 0644);
+		fd = open(redir->path, O_CREAT | O_RDWR | O_APPEND, 0644);
 	else
-		fd = open(redir->path,
-				O_CREAT | O_RDWR | O_TRUNC, 0644);
+		fd = open(redir->path, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	return (fd);
 }
 
@@ -63,7 +61,6 @@ int	handle_open(t_redir *redir)
 		close(fd);
 	return (EXIT_SUCCESS);
 }
-
 
 int	handle_outfile(t_redir *redir)
 {

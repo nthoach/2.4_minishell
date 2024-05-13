@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor_data.c                                   :+:      :+:    :+:   */
+/*   exec2_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:32:54 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 16:58:14 by nthoach          ###   ########.fr       */
+/*   Created: 2024/05/13 17:10:16 by honguyen          #+#    #+#             */
+/*   Updated: 2024/05/13 17:17:49 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -56,7 +56,7 @@ int	check_redir_helper(int type, t_redir *dir)
 				STDERR_FILENO);
 			return (EXIT_FAILURE);
 		}
-		close (fd);
+		close(fd);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -87,14 +87,14 @@ int	loop_paths(t_data *data, t_cmds *cmd)
 	char	*mycmd;
 
 	i = 0;
-	if (cmd->command[0] != '/' && cmd->command[0] != '.') //not a path cmd but join to a path
+	if (cmd->command[0] != '/' && cmd->command[0] != '.')
 	{
 		while (data->paths && data->paths[i])
 		{
 			mycmd = ft_strjoin(data->paths[i], cmd->command);
 			if (!access(mycmd, F_OK))
 			{
-				execve(mycmd, cmd->args, data->envp); //execute a cmd
+				execve(mycmd, cmd->args, data->envp);
 				return (find_exec_error(mycmd, 1));
 			}
 			free(mycmd);

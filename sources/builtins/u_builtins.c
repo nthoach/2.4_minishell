@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_builtins.c                                   :+:      :+:    :+:   */
+/*   u_builtins.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:32:14 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 16:57:24 by nthoach          ###   ########.fr       */
+/*   Created: 2024/05/13 17:08:46 by honguyen          #+#    #+#             */
+/*   Updated: 2024/05/13 17:19:19 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -45,12 +45,12 @@ char	*delete_quotes_value(char *str)
 	split_quotes = ft_split(str, '"');
 	if (!split_quotes[1])
 	{
-		free_double_ptr((void **) split_quotes);
+		free_double_ptr((void **)split_quotes);
 		split_quotes = ft_split(str, '\'');
 	}
 	free(str);
 	str = ft_strjoin(split_quotes[0], split_quotes[1]);
-	free_double_ptr((void **) split_quotes);
+	free_double_ptr((void **)split_quotes);
 	return (str);
 }
 
@@ -61,17 +61,16 @@ int	invalid_identifier(char *str, int f)
 	i = -1;
 	while (str[++i])
 	{
-		if (f && i == (int) equal_sign(str) - 1)
+		if (f && i == (int)equal_sign(str) - 1)
 			break ;
-		if (str[i] == '|' || str[i] == '<' || str[i] == '>'
-			|| str[i] == '[' || str[i] == ']' || str[i] == '='
-			|| str[i] == '\'' || str[i] == '\"' || str[i] == ' '
-			|| str[i] == ',' || str[i] == '.' || str[i] == '*'
-			|| str[i] == ':' || str[i] == '/' || str[i] == '{'
-			|| str[i] == '^' || str[i] == '%' || str[i] == '#'
-			|| str[i] == '@' || str[i] == '!' || str[i] == '~'
-			|| str[i] == '-' || str[i] == '?' || str[i] == '&'
-			|| str[i] == '}' || str[i] == '+' || str[i] == '$' )
+		if (str[i] == '|' || str[i] == '<' || str[i] == '>' || str[i] == '['
+			|| str[i] == ']' || str[i] == '=' || str[i] == '\''
+			|| str[i] == '\"' || str[i] == ' ' || str[i] == ','
+			|| str[i] == '.'
+			|| str[i] == '*' || str[i] == ':' || str[i] == '/' || str[i] == '{'
+			|| str[i] == '^' || str[i] == '%' || str[i] == '#' || str[i] == '@'
+			|| str[i] == '!' || str[i] == '~' || str[i] == '-' || str[i] == '?'
+			|| str[i] == '&' || str[i] == '}' || str[i] == '+' || str[i] == '$')
 			return (1);
 	}
 	return (0);
@@ -81,8 +80,7 @@ int	check_valid_identifier(char c)
 {
 	return (c == '|' || c == '<' || c == '>' || c == '[' || c == ']'
 		|| c == '\'' || c == '\"' || c == ' ' || c == ',' || c == '.'
-		|| c == ':' || c == '/' || c == '{' || c == '}' || c == '+'
-		|| c == '^' || c == '%' || c == '#' || c == '@' || c == '!'
-		|| c == '~'
-		|| c == '=' || c == '-' || c == '?' || c == '&' || c == '*');
+		|| c == ':' || c == '/' || c == '{' || c == '}' || c == '+' || c == '^'
+		|| c == '%' || c == '#' || c == '@' || c == '!' || c == '~' || c == '='
+		|| c == '-' || c == '?' || c == '&' || c == '*');
 }

@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                            :+:      :+:    :+:   */
+/*   ini2_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 21:35:36 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:41:01 by nthoach          ###   ########.fr       */
+/*   Created: 2024/05/13 17:12:06 by honguyen          #+#    #+#             */
+/*   Updated: 2024/05/13 17:12:08 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -31,7 +31,7 @@ void	free_cmd(t_cmds *cmd)
 	if (cmd->hd_file_name)
 		free(cmd->hd_file_name);
 	if (cmd->args)
-		free_double_ptr((void **) cmd->args);
+		free_double_ptr((void **)cmd->args);
 	ptr = cmd->redirections;
 	while (ptr)
 	{
@@ -74,7 +74,7 @@ void	free1_data(t_data *data)
 		free(data->pwd);
 	if (data->old_pwd)
 		free(data->old_pwd);
-	free_double_ptr((void **) data->envp);
+	free_double_ptr((void **)data->envp);
 }
 
 char	**ft_arrdup(char **arr)
@@ -94,7 +94,7 @@ char	**ft_arrdup(char **arr)
 		rtn[i] = ft_strdup(arr[i]);
 		if (rtn[i] == NULL)
 		{
-			free_double_ptr((void **) rtn);
+			free_double_ptr((void **)rtn);
 			return (rtn);
 		}
 		i++;

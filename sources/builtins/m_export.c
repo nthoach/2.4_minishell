@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   m_export.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:42 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:31 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:04:49 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -19,8 +19,7 @@ int	variable_exist(t_data *data, char *str)
 	i = 0;
 	while (data->envp[i])
 	{
-		if (ft_strncmp(data->envp[i],
-				str, equal_sign(data->envp[i])) == 0)
+		if (ft_strncmp(data->envp[i], str, equal_sign(data->envp[i])) == 0)
 		{
 			free(data->envp[i]);
 			data->envp[i] = ft_strdup(str);
@@ -120,9 +119,8 @@ int	m_export(t_data *data, t_cmds *cmds)
 	{
 		while (cmds->args[i])
 		{
-			if (!check_parameter(cmds->args[i])
-				&& !variable_exist(data, cmds->args[i])
-				&& !invalid_identifier(cmds->args[i], 1))
+			if (!check_parameter(cmds->args[i]) && !variable_exist(data,
+					cmds->args[i]) && !invalid_identifier(cmds->args[i], 1))
 			{
 				tmp = add_var(data->envp, cmds->args[i]);
 				free_double_ptr((void **)data->envp);

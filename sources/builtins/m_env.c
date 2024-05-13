@@ -1,22 +1,22 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   m_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:27 by nthoach           #+#    #+#             */
-/*   Updated: 2024/04/25 17:48:30 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:04:45 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 int	m_env(t_data *data, t_cmds *cmds)
 {
-	int		i;
+	int	i;
 
-	(void) cmds;
+	(void)cmds;
 	i = 0;
 	while (data->envp[i])
 	{
@@ -38,8 +38,8 @@ char	**bubble_sort(char **arr, int n)
 		j = 0;
 		while (j < n - i - 1)
 		{
-			if (ft_strncmp(arr[j], arr[j + 1],
-					ft_strlen(arr[j]) + ft_strlen(arr[j + 1])) > 0)
+			if (ft_strncmp(arr[j], arr[j + 1], ft_strlen(arr[j])
+					+ ft_strlen(arr[j + 1])) > 0)
 			{
 				temp = arr[j];
 				arr[j] = arr[j + 1];
@@ -91,6 +91,6 @@ void	sorted_env(t_data *data)
 		ft_putendl_fd("\"", STDOUT_FILENO);
 		i++;
 	}
-	free_double_ptr((void **) sorted);
+	free_double_ptr((void **)sorted);
 	return ;
 }

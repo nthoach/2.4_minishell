@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser_all.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/07 08:14:41 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:11:33 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -83,17 +83,17 @@ int	count_args(t_word *start, char *command)
 	while (ptr && ptr->type != PIPE)
 	{
 		if (ptr->type == ARG)
-			count ++;
+			count++;
 		ptr = ptr->next;
 	}
 	if (!command)
-		count --;
+		count--;
 	return (count);
 }
 
 // checks input and parses to a data struct
 // valid_input invalid with ';' '&' '\'
-// split_input 
+// split_input
 int	parse_all(t_data *data)
 {
 	t_split	*split;

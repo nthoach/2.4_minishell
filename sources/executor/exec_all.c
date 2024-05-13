@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.c                                         :+:      :+:    :+:   */
+/*   exec_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:03 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 23:01:12 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 16:31:23 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -95,7 +95,7 @@ int	executor(t_data *data)
 	return (0);
 }
 
-//executing all the command from data
+// executing all the command from data
 int	exec_all(t_data *data)
 {
 	signal(SIGQUIT, sigquit_handler);

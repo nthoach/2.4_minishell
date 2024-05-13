@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:13 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 23:00:36 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:10:34 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -47,7 +47,7 @@ int	create_heredoc(t_redir *heredoc, char *file_name)
 
 int	ft_heredoc(t_data *data, t_redir *heredoc, char *file_name)
 {
-	int		sl;
+	int	sl;
 
 	sl = EXIT_SUCCESS;
 	g_status_code = IN_HEREDOC;
@@ -82,7 +82,7 @@ int	send_heredoc(t_data *data, t_cmds *cmd)
 		if (redir->type == HEREDOC)
 		{
 			if (cmd->hd_file_name)
-				free (cmd->hd_file_name);
+				free(cmd->hd_file_name);
 			cmd->hd_file_name = generate_heredoc_filename();
 			sl = ft_heredoc(data, redir, cmd->hd_file_name);
 			if (sl)

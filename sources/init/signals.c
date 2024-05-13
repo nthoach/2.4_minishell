@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_signals.c                                     :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nthoach <nthoach@student.42.fr>            +#+  +:+       +#+        */
+/*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:55 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/01 21:28:15 by nthoach          ###   ########.fr       */
+/*   Updated: 2024/05/13 17:10:52 by honguyen         ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
@@ -16,6 +16,7 @@ int	event(void)
 {
 	return (EXIT_SUCCESS);
 }
+
 // ctrl + c
 void	sigint_handler(int sig)
 {
@@ -40,7 +41,7 @@ void	sigint_handler(int sig)
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
-	(void) sig;
+	(void)sig;
 }
 
 // ctl+ '\'
@@ -58,4 +59,3 @@ void	sigquit_handler(int sig)
 		return ;
 	}
 }
-

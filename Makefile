@@ -31,7 +31,7 @@ sources	=	sources/main.c \
 		sources/utils/ini2_data.c \
 		sources/error/error_all.c \
 		sources/executor/redir_check.c \
-		sources/executor/executor.c \
+		sources/executor/exec_all.c \
 		sources/executor/single_cmd.c \
 		sources/executor/exec1_utils.c \
 		sources/executor/heredoc.c \
@@ -43,7 +43,7 @@ sources	=	sources/main.c \
 		sources/lexer/symbol_utils.c \
 		sources/lexer/expand_env.c \
 		sources/lexer/combine_quotes.c \
-		sources/parser/parser.c \
+		sources/parser/parser_all.c \
 		sources/parser/parser_utils.c \
 		sources/parser/redirections.c \
 		sources/parser/tokens.c
@@ -61,7 +61,9 @@ HEADERS	=	./headers/builtins.h \
 			./headers/lexer.h \
 			./headers/utils.h
 
-READLINE_DIR = "/opt/homebrew/Cellar/readline/8.2.10"
+READLINE_DIR = /System/Volumes/Data/Users/honguyen/.brew/Cellar/readline/8.2.10
+
+#READLINE_DIR = "/opt/homebrew/Cellar/readline/8.2.10"
 
 READLINE_LIB = -L $(READLINE_DIR)/lib -L$(LIBFTP) -lft -lreadline -lhistory 
 
