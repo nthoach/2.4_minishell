@@ -6,11 +6,11 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:11:23 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:25 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../headers/mnsh.h"
 
 int	is_space(char c)
 {

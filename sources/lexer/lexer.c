@@ -6,11 +6,11 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:25 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../headers/mnsh.h"
 
 // frees split structure
 void	free_split(t_split *split)
@@ -43,7 +43,7 @@ int	input2words(char *input, t_split *split)
 			i++;
 		if (input[i])
 		{
-			if (define_word(input, &i, split) == 0)
+			if (pre_label_word(input, &i, split) == 0)
 				return (0);
 		}
 	}
@@ -67,7 +67,7 @@ t_split	*input2split(char *input, t_data *data)
 		free_split(split);
 		return (0);
 	}
-	if (expand_env(split, data) == 0 || combine_quotes(split) == 0)
+	if (expand_env(split, data) == 0 || exp_define_quote(split) == 0)
 	{
 		free_split(split);
 		return (0);

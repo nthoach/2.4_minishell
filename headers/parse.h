@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parse.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,15 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef PARSE_H
+# define PARSE_H
 
-# include "minishell.h"
+# include "mnsh.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <signal.h>
 # include <stdbool.h>
-# include "lexer.h"
+# include "lex.h"
 
 # define CLEAR_SCREEN_SEQ "\033[2J\033[H"
 

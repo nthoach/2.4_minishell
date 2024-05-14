@@ -6,11 +6,11 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:45 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:12:15 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../headers/minishell.h"
+#include "../headers/mnsh.h"
 
 void	minishell_loop(t_data *data)
 {

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   mnsh.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:57:25 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 19:22:31 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 20:03:05 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef MNSH_H
+# define MNSH_H
 # include "libft.h"
 # include <fcntl.h>
 # include <readline/readline.h>
@@ -24,9 +24,9 @@
 # include <string.h>
 # include <unistd.h>
 # include <limits.h>
-# include "builtins.h"
-# include "executor.h"
-# include "parsing.h"
+# include "built.h"
+# include "exec.h"
+# include "parse.h"
 
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -47,10 +47,6 @@ int		event(void);
 void	sigint_handler(int sig);
 void	sigquit_handler(int sig);
 char	**add_var(char **arr, char *str);
-
-//char	*delete_quotes_value(char *str);
-//char	*delete_quotes(char *str, char c);
-//char	*delete_quotes_export(char *str, char c);
 
 int		parse_paths(t_data *data);
 

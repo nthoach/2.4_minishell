@@ -42,21 +42,21 @@ sources	=	sources/main.c \
 		sources/lexer/valid_split.c \
 		sources/lexer/symbol_utils.c \
 		sources/lexer/expand_env.c \
-		sources/lexer/combine_quotes.c \
+		sources/lexer/exp_define_quote.c \
 		sources/parser/parser_all.c \
-		sources/parser/parser_utils.c \
-		sources/parser/redirections.c \
+		sources/parser/parser_help.c \
+		sources/parser/redirec.c \
 		sources/parser/tokens.c
 
 OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 
 LIBFT	=	./libft/libft.a
 
-HEADERS	=	./headers/builtins.h \
-			./headers/executor.h \
-			./headers/minishell.h \
-			./headers/parsing.h \
-			./headers/lexer.h
+HEADERS	=	./headers/built.h \
+			./headers/exec.h \
+			./headers/mnsh.h \
+			./headers/parse.h \
+			./headers/lex.h
 
 READLINE_DIR = /System/Volumes/Data/Users/honguyen/.brew/Cellar/readline/8.2.10
 

@@ -6,11 +6,11 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:12:06 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 19:23:44 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../headers/mnsh.h"
 
 // write data->paths, init cmds/pid/herdoc
 int	ini2_data(t_data *data)

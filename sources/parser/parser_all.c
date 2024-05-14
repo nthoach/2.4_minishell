@@ -6,11 +6,11 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 19:12:10 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../headers/mnsh.h"
 
 // sorts tokens to list of commands
 int	split2cmds(t_split *split, t_data *data)

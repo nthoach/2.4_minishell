@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   combine_quotes.c                                   :+:      :+:    :+:   */
+/*   exp_define_quote.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../headers/mnsh.h"
 
 int	comb_quote_len(char *str)
 {
@@ -81,7 +81,7 @@ int	expand_quote(t_word *word)
 }
 
 // finds quotes, calls expander, and replaces with correct type
-int	combine_quotes(t_split *split)
+int	exp_define_quote(t_split *split)
 {
 	t_word	*ptr;
 

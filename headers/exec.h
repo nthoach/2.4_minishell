@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   executor.h                                         :+:      :+:    :+:   */
+/*   exec.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,12 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTOR_H
-# define EXECUTOR_H
-# include "parsing.h"
-# include "minishell.h"
+#ifndef EXEC_H
+# define EXEC_H
+# include "parse.h"
+# include "mnsh.h"
 
-// redirections
 int				valid_redir(t_command *cmd);
 int				valid_outfile(t_redir *redir);
 int				valid_byopenfile(t_redir *redir);

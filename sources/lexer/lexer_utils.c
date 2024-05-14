@@ -6,14 +6,14 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:11:09 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../headers/mnsh.h"
 
 // creates new word
-t_word	*new_word(char *c, int type)
+t_word	*create_word(char *c, int type)
 {
 	t_word	*word;
 
@@ -33,7 +33,7 @@ int	push_word(t_split *split, char *c, int type)
 {
 	t_word	*word;
 
-	word = new_word(c, type);
+	word = create_word(c, type);
 	if (!word)
 		return (0);
 	word->index = split->cmds;
@@ -46,34 +46,6 @@ int	push_word(t_split *split, char *c, int type)
 	split->last = word;
 	split->cmds++;
 	return (1);
-}
-
-// prints split list for visualization
-void	print_split(t_split *split)
-{
-	t_word	*ptr;
-
-	ptr = split->first;
-	while (ptr)
-	{
-		printf("%i. ", ptr->index);
-		printf("%s", ptr->cont);
-		if (ptr->type == CMD)
-			printf(" - CMD\n");
-		else if (ptr->type == REDIR)
-			printf(" - REDIR\n");
-		else if (ptr->type == PATH)
-			printf(" - PATH\n");
-		else if (ptr->type == PIPE)
-			printf(" - PIPE\n");
-		else if (ptr->type == QUOTE)
-			printf(" - QUOTE\n");
-		else if (ptr->type == ARG)
-			printf(" - ARG\n");
-		else if (ptr->type == STR)
-			printf(" - STR\n");
-		ptr = ptr->next;
-	}
 }
 
 char	*expand_env_quotes(t_word *word, int *i, t_data *data)

@@ -6,11 +6,11 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:08:46 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 19:14:17 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../headers/mnsh.h"
 
 // This function updates the data struct with the new paths
 void	update_path(t_data *data)
@@ -37,22 +37,6 @@ size_t	is_equalsign(char *str)
 	}
 	return (0);
 }
-
-//char	*delete_quotes_value(char *str)
-//{
-//	char	**split_quotes;
-
-//	split_quotes = ft_split(str, '"');
-//	if (!split_quotes[1])
-//	{
-//		free_double_ptr((void **)split_quotes);
-//		split_quotes = ft_split(str, '\'');
-//	}
-//	free(str);
-//	str = ft_strjoin(split_quotes[0], split_quotes[1]);
-//	free_double_ptr((void **)split_quotes);
-//	return (str);
-//}
 
 int	invalid_symbols(char *str, int f)
 {

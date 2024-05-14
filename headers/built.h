@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.h                                         :+:      :+:    :+:   */
+/*   built.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:17 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/14 16:56:51 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:51:12 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILTINS_H
-# define BUILTINS_H
+#ifndef BUILT_H
+# define BUILT_H
 # include <dirent.h>
-# include "minishell.h"
-# include "parsing.h"
+# include "mnsh.h"
+# include "parse.h"
 
 int		(*builtin_fcn_name(char *str))(t_data *data, t_command *cmds);
 int		b_echo(t_data *data, t_command *cmds);

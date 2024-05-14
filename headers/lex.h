@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.h                                            :+:      :+:    :+:   */
+/*   lex.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:57:15 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 16:57:19 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:47:43 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEXER_H
-# define LEXER_H
+#ifndef LEX_H
+# define LEX_H
 
-# include "parsing.h"
+# include "parse.h"
 
 typedef struct s_word	t_word;
 typedef struct s_data	t_data;
@@ -50,10 +50,9 @@ t_split	*input2split(char *input, t_data *data);
 int		valid_split(t_split *split);
 int		push_word(t_split *split, char *c, int type);
 void	free_split(t_split *split);
-int		define_word(char *input, int *i, t_split *split);
-void	print_split(t_split *split);
-int		combine_quotes(t_split *split);
-t_word	*new_word(char *c, int type);
+int		pre_label_word(char *input, int *i, t_split *split);
+int		exp_define_quote(t_split *split);
+t_word	*create_word(char *c, int type);
 int		expand_env(t_split *split, t_data *data);
 void	label_word(t_split *split);
 char	*expand_env_quotes(t_word *word, int *i, t_data *data);

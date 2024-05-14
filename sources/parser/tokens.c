@@ -6,11 +6,11 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:14 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../headers/minishell.h"
+#include "../../headers/mnsh.h"
 
 // adds redirection to list
 static int	add_redir(t_split *split, char *input, int *i)
@@ -108,7 +108,7 @@ static int	add_str(t_split *split, char *input, int *i)
 }
 
 // define: PIPE, REDIR, QUOTE, STR
-int	define_word(char *input, int *i, t_split *split)
+int	pre_label_word(char *input, int *i, t_split *split)
 {
 	int	success;
 
