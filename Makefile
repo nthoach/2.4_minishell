@@ -5,48 +5,46 @@ CC = cc
 LIBFTP = libft/
 PATHO = objs/
 PATHS = sources/
-PATHSL = sources/lexer/
-PATHSP = sources/parser/
-PATHSB = sources/builtins/
+PATHSL = sources/lex/
+PATHSP = sources/parse/
+PATHSB = sources/built/
 PATHSU = sources/utils/
-PATHSE = sources/error/
-PATHP = sources/pipex/
-PATHEX = sources/executor/
+PATHEX = sources/exec/
 PATHINI = sources/init/
 
-sources	=	sources/main.c \
-		sources/init/signals.c \
+sources	=	sources/minishell.c \
+		sources/init/signal_hand.c \
 		sources/init/ini1_data.c \
-		sources/builtins/builtins.c \
-		sources/builtins/b_cd.c \
-		sources/builtins/b_echo.c \
-		sources/builtins/b_env.c \
-		sources/builtins/b_exit.c \
-		sources/builtins/b_export.c \
-		sources/builtins/b_pwd.c \
-		sources/builtins/b_unset.c \
-		sources/builtins/u_builtins.c \
-		sources/builtins/p_builtins.c \
+		sources/built/built.c \
+		sources/built/b_cd.c \
+		sources/built/b_echo.c \
+		sources/built/b_env.c \
+		sources/built/b_exit.c \
+		sources/built/b_export.c \
+		sources/built/b_pwd.c \
+		sources/built/b_unset.c \
+		sources/built/u_built.c \
+		sources/built/p_built.c \
 		sources/utils/parse_envp.c \
 		sources/utils/ini2_data.c \
-		sources/error/error_all.c \
-		sources/executor/redir_check.c \
-		sources/executor/exec_all.c \
-		sources/executor/nopipe_cmd.c \
-		sources/executor/exec1_utils.c \
-		sources/executor/heredoc.c \
-		sources/executor/exec2_utils.c \
-		sources/lexer/input_validation.c \
-		sources/lexer/lexer.c \
-		sources/lexer/lexer_utils.c \
-		sources/lexer/valid_split.c \
-		sources/lexer/symbol_utils.c \
-		sources/lexer/expand_env.c \
-		sources/lexer/exp_define_quote.c \
-		sources/parser/parser_all.c \
-		sources/parser/parser_help.c \
-		sources/parser/redirec.c \
-		sources/parser/tokens.c
+		sources/utils/error_all.c \
+		sources/exec/redir_check.c \
+		sources/exec/exec_all.c \
+		sources/exec/nopipe_cmd.c \
+		sources/exec/exec1_utils.c \
+		sources/exec/heredoc.c \
+		sources/exec/exec2_utils.c \
+		sources/lex/input_validation.c \
+		sources/lex/lex.c \
+		sources/lex/lex_utils.c \
+		sources/lex/valid_split.c \
+		sources/lex/symbol_utils.c \
+		sources/lex/expand_env.c \
+		sources/lex/exp_define_quote.c \
+		sources/parse/parse_all.c \
+		sources/parse/parse_help.c \
+		sources/parse/redirec.c \
+		sources/parse/tokens.c
 
 OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 
@@ -65,7 +63,7 @@ READLINE_DIR = /System/Volumes/Data/Users/honguyen/.brew/Cellar/readline/8.2.10
 READLINE_LIB = -L $(READLINE_DIR)/lib -L$(LIBFTP) -lft -lreadline -lhistory 
 
 
-INCLUDES = -I./headers -I$(PATHP) -I$(LIBFTP) -I$(READLINE_DIR)/include
+INCLUDES = -I./headers -I$(LIBFTP) -I$(READLINE_DIR)/include
 
 all: $(PATHO) $(NAME)
 	@echo "\n"
@@ -95,10 +93,6 @@ $(PATHO)%.o:: $(PATHSB)%.c $(HEADERS)
 
 $(PATHO)%.o:: $(PATHSU)%.c $(HEADERS)
 	@echo "Compiling ${notdir $<}									in	$(PATHSU)${END}"
-	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
-
-$(PATHO)%.o:: $(PATHSE)%.c $(HEADERS)
-	@echo "Compiling ${notdir $<}									in	$(PATHSE)${END}"
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATHO)%.o:: $(PATHEX)%.c $(HEADERS)
