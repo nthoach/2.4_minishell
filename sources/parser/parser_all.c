@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:33 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:12:10 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 // sorts tokens to list of commands
 int	split2cmds(t_split *split, t_data *data)
 {
-	t_word	*ptr;
-	t_cmds	*new_cmd;
+	t_word		*ptr;
+	t_command	*new_cmd;
 
 	ptr = split->first;
 	while (ptr)
 	{
-		new_cmd = (t_cmds *)ft_calloc(1, sizeof(t_cmds));
+		new_cmd = (t_command *)ft_calloc(1, sizeof(t_command));
 		if (!new_cmd)
-			return (!ft_error(1));
+			return (!err_all(1));
 		ptr = init_cmd(ptr, new_cmd);
 		if (!new_cmd || !new_cmd->args)
 			return (0);
@@ -36,8 +36,8 @@ int	split2cmds(t_split *split, t_data *data)
 
 int	count_pipes(t_data *data)
 {
-	t_cmds	*ptr;
-	int		count;
+	t_command	*ptr;
+	int			count;
 
 	count = 0;
 	ptr = data->cmds;
@@ -52,7 +52,7 @@ int	count_pipes(t_data *data)
 // print data for visualization
 // void	print_data(t_data *data)
 // {
-// 	t_cmds	*c_ptr;
+// 	t_command	*c_ptr;
 // 	int		i;
 // 	t_redir	*r_ptr;
 

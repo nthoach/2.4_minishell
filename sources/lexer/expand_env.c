@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:42 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:16:44 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*replace_env(char *str, int *i, char *exp, int len)
 	full = (char *)ft_calloc((ft_strlen(str) - len) + ft_strlen(exp) + 2,
 			sizeof(char));
 	if (!full)
-		ft_error(1);
+		err_all(1);
 	j = -1;
 	k = (*i) - len - 1;
 	while (full && ++j < k)
@@ -54,7 +54,7 @@ int	found_env(char *old, int *i, t_word *word, t_data *data)
 		return (1);
 	var = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!var)
-		return (!ft_error(1));
+		return (!err_all(1));
 	j = 0;
 	(*i)++;
 	while (j < len)
@@ -81,7 +81,7 @@ int	expand_env_str(t_word *word, t_data *data)
 				+ 1] == '?')
 			word->cont = expand_err(word->cont, &i);
 		else if (word->cont[i] == '$' && word->cont[i + 1]
-			&& check_valid_identifier(word->cont[i + 1]))
+			&& is_valid_symbol(word->cont[i + 1]))
 			i = i + 2;
 		else if (word->cont[i] == '$' && word->cont[i + 1])
 		{

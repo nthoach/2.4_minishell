@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:25 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:15 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_split	*input2split(char *input, t_data *data)
 	split = (t_split *)ft_calloc(1, sizeof(t_split));
 	if (!split)
 	{
-		ft_error(1);
+		err_all(1);
 		return (0);
 	}
 	if (input2words(input, split) == 0 || valid_split(split) == 0)

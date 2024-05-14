@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_unset.c                                          :+:      :+:    :+:   */
+/*   b_unset.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:57 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:04:50 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-char	**whileloop_del_var(char **arr, char **rtn, char *str)
+char	**whileloop_del_env_var(char **arr, char **rtn, char *str)
 {
 	int	i;
 	int	j;
@@ -21,8 +21,8 @@ char	**whileloop_del_var(char **arr, char **rtn, char *str)
 	j = 0;
 	while (arr[i] != NULL)
 	{
-		if (!(ft_strncmp(arr[i], str, equal_sign(arr[i]) - 1) == 0
-				&& equal_sign(arr[i]) == ft_strlen(str) + 1
+		if (!(ft_strncmp(arr[i], str, is_equalsign(arr[i]) - 1) == 0
+				&& is_equalsign(arr[i]) == ft_strlen(str) + 1
 				&& arr[i][ft_strlen(str)] == '='))
 		{
 			rtn[j] = ft_strdup(arr[i]);
@@ -38,7 +38,7 @@ char	**whileloop_del_var(char **arr, char **rtn, char *str)
 	return (rtn);
 }
 
-char	**del_var(char **arr, char *str)
+char	**del_env_var(char **arr, char *str)
 {
 	char	**rtn;
 	size_t	i;
@@ -49,20 +49,20 @@ char	**del_var(char **arr, char *str)
 	rtn = ft_calloc(i + 1, sizeof(char *));
 	if (!rtn)
 		return (NULL);
-	rtn = whileloop_del_var(arr, rtn, str);
+	rtn = whileloop_del_env_var(arr, rtn, str);
 	return (rtn);
 }
 
-int	unset_error(t_cmds *cmds)
+int	unset_error(t_command *cmds)
 {
-	if (invalid_identifier(cmds->args[1], 0))
+	if (invalid_symbols(cmds->args[1], 0))
 	{
 		ft_putstr_fd("minishell: unset: `", STDERR_FILENO);
 		ft_putstr_fd(cmds->args[1], STDERR_FILENO);
 		ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	if (equal_sign(cmds->args[1]) != 0)
+	if (is_equalsign(cmds->args[1]) != 0)
 	{
 		ft_putendl_fd("minishell: unset: not a valid identifier",
 			STDERR_FILENO);
@@ -71,7 +71,7 @@ int	unset_error(t_cmds *cmds)
 	return (EXIT_SUCCESS);
 }
 
-int	m_unset(t_data *data, t_cmds *cmds)
+int	b_unset(t_data *data, t_command *cmds)
 {
 	char	**tmp;
 
@@ -81,7 +81,7 @@ int	m_unset(t_data *data, t_cmds *cmds)
 		return (EXIT_FAILURE);
 	else
 	{
-		tmp = del_var(data->envp, cmds->args[1]);
+		tmp = del_env_var(data->envp, cmds->args[1]);
 		free_double_ptr((void **)data->envp);
 		data->envp = tmp;
 	}

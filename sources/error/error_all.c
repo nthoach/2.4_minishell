@@ -6,13 +6,13 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:22 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:08:54 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	ft_error(int error)
+int	err_all(int error)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (error == 0)
@@ -38,30 +38,30 @@ int	ft_error(int error)
 	return (EXIT_FAILURE);
 }
 
-int	parser_error(t_word *ptr)
+int	err_parser(t_word *ptr)
 {
 	if (ptr->type == PIPE)
-		token_error(0, ERR_PIPE);
+		err_token(0, ERR_PIPE);
 	else if (ptr->type == REDIR && ft_strlen(ptr->cont) == 1)
 	{
 		if (ptr->cont[0] == '>')
-			token_error(0, ERR_G);
+			err_token(0, ERR_G);
 		else if (ptr->cont[0] == '<')
-			token_error(0, ERR_L);
+			err_token(0, ERR_L);
 	}
 	else if (ptr->type == REDIR && ft_strlen(ptr->cont) == 2)
 	{
 		if (ptr->cont[0] == '>')
-			token_error(0, ERR_GG);
+			err_token(0, ERR_GG);
 		else if (ptr->cont[0] == '<')
-			token_error(0, ERR_LL);
+			err_token(0, ERR_LL);
 	}
 	else
-		token_error(0, ERR_NL);
+		err_token(0, ERR_NL);
 	return (EXIT_FAILURE);
 }
 
-int	invalid_token_error(char *c)
+int	err_token_invalid(char *c)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
 		STDERR_FILENO);
@@ -70,7 +70,7 @@ int	invalid_token_error(char *c)
 	return (EXIT_FAILURE);
 }
 
-int	token_error(t_data *data, int code)
+int	err_token(t_data *data, int code)
 {
 	ft_putstr_fd("minishell: syntax error near unexpected token ",
 		STDERR_FILENO);

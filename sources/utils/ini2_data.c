@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:12:06 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 17:12:08 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:23:44 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	ini2_data(t_data *data)
 }
 
 // frees memory associated with a cmd
-void	free_cmd(t_cmds *cmd)
+void	free_cmd(t_command *cmd)
 {
 	t_redir	*ptr;
 	t_redir	*del;
 
-	if (cmd->hd_file_name)
-		free(cmd->hd_file_name);
+	if (cmd->filename_hd)
+		free(cmd->filename_hd);
 	if (cmd->args)
 		free_double_ptr((void **)cmd->args);
 	ptr = cmd->redirections;
@@ -48,8 +48,8 @@ void	free_cmd(t_cmds *cmd)
 // resets data variables
 int	free2_data(t_data *data)
 {
-	t_cmds	*ptr;
-	t_cmds	*del;
+	t_command	*ptr;
+	t_command	*del;
 
 	ptr = data->cmds;
 	while (ptr)
@@ -77,7 +77,7 @@ void	free1_data(t_data *data)
 	free_double_ptr((void **)data->envp);
 }
 
-char	**ft_arrdup(char **arr)
+char	**dup_arr(char **arr)
 {
 	char	**rtn;
 	size_t	i;

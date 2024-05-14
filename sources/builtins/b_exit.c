@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_exit.c                                           :+:      :+:    :+:   */
+/*   b_exit.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:35 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:04:47 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	determine_exit_code(char **str)
 	exit(exit_code);
 }
 
-int	m_exit(t_data *data, t_cmds *cmds)
+int	b_exit(t_data *data, t_command *cmds)
 {
 	char	**str;
 
@@ -69,7 +69,7 @@ int	m_exit(t_data *data, t_cmds *cmds)
 		free1_data(data);
 		exit(255);
 	}
-	str = ft_arrdup(cmds->args);
+	str = dup_arr(cmds->args);
 	free2_data(data);
 	free1_data(data);
 	determine_exit_code(str);

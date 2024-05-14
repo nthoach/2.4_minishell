@@ -6,14 +6,14 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:08:46 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 17:19:19 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:14:17 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 // This function updates the data struct with the new paths
-void	change_path(t_data *data)
+void	update_path(t_data *data)
 {
 	char	*tmp;
 
@@ -24,7 +24,7 @@ void	change_path(t_data *data)
 	data->pwd = getcwd(NULL, 0);
 }
 
-size_t	equal_sign(char *str)
+size_t	is_equalsign(char *str)
 {
 	size_t	i;
 
@@ -38,30 +38,30 @@ size_t	equal_sign(char *str)
 	return (0);
 }
 
-char	*delete_quotes_value(char *str)
-{
-	char	**split_quotes;
+//char	*delete_quotes_value(char *str)
+//{
+//	char	**split_quotes;
 
-	split_quotes = ft_split(str, '"');
-	if (!split_quotes[1])
-	{
-		free_double_ptr((void **)split_quotes);
-		split_quotes = ft_split(str, '\'');
-	}
-	free(str);
-	str = ft_strjoin(split_quotes[0], split_quotes[1]);
-	free_double_ptr((void **)split_quotes);
-	return (str);
-}
+//	split_quotes = ft_split(str, '"');
+//	if (!split_quotes[1])
+//	{
+//		free_double_ptr((void **)split_quotes);
+//		split_quotes = ft_split(str, '\'');
+//	}
+//	free(str);
+//	str = ft_strjoin(split_quotes[0], split_quotes[1]);
+//	free_double_ptr((void **)split_quotes);
+//	return (str);
+//}
 
-int	invalid_identifier(char *str, int f)
+int	invalid_symbols(char *str, int f)
 {
 	int	i;
 
 	i = -1;
 	while (str[++i])
 	{
-		if (f && i == (int)equal_sign(str) - 1)
+		if (f && i == (int)is_equalsign(str) - 1)
 			break ;
 		if (str[i] == '|' || str[i] == '<' || str[i] == '>' || str[i] == '['
 			|| str[i] == ']' || str[i] == '=' || str[i] == '\''
@@ -76,7 +76,7 @@ int	invalid_identifier(char *str, int f)
 	return (0);
 }
 
-int	check_valid_identifier(char c)
+int	is_valid_symbol(char c)
 {
 	return (c == '|' || c == '<' || c == '>' || c == '[' || c == ']'
 		|| c == '\'' || c == '\"' || c == ' ' || c == ',' || c == '.'

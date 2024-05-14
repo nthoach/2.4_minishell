@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:11:09 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:12 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_word	*new_word(char *c, int type)
 	word = (t_word *)ft_calloc(1, sizeof(t_word));
 	if (!word)
 	{
-		ft_error(1);
+		err_all(1);
 		return (0);
 	}
 	word->type = type;
@@ -117,7 +117,7 @@ int	found_env_helper(t_word *word, char *old, int *i)
 		return (-1);
 	}
 	while (old[++j] && !is_space(old[j]) && old[j] != '$'
-		&& !check_valid_identifier(old[j]))
+		&& !is_valid_symbol(old[j]))
 		len++;
 	if (!len)
 	{

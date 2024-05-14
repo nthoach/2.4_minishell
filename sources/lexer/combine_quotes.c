@@ -6,13 +6,12 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:32 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:10:56 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:31:19 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-// caculates length of string with combined quotes
 int	comb_quote_len(char *str)
 {
 	int		i;
@@ -33,7 +32,6 @@ int	comb_quote_len(char *str)
 	return (len);
 }
 
-// returns the combined-quote string
 char	*comb_quote_str(t_word *word, char *comb)
 {
 	int		i;

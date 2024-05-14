@@ -18,13 +18,13 @@ sources	=	sources/main.c \
 		sources/init/signals.c \
 		sources/init/ini1_data.c \
 		sources/builtins/builtins.c \
-		sources/builtins/m_cd.c \
-		sources/builtins/m_echo.c \
-		sources/builtins/m_env.c \
-		sources/builtins/m_exit.c \
-		sources/builtins/m_export.c \
-		sources/builtins/m_pwd.c \
-		sources/builtins/m_unset.c \
+		sources/builtins/b_cd.c \
+		sources/builtins/b_echo.c \
+		sources/builtins/b_env.c \
+		sources/builtins/b_exit.c \
+		sources/builtins/b_export.c \
+		sources/builtins/b_pwd.c \
+		sources/builtins/b_unset.c \
 		sources/builtins/u_builtins.c \
 		sources/builtins/p_builtins.c \
 		sources/utils/parse_envp.c \
@@ -32,7 +32,7 @@ sources	=	sources/main.c \
 		sources/error/error_all.c \
 		sources/executor/redir_check.c \
 		sources/executor/exec_all.c \
-		sources/executor/single_cmd.c \
+		sources/executor/nopipe_cmd.c \
 		sources/executor/exec1_utils.c \
 		sources/executor/heredoc.c \
 		sources/executor/exec2_utils.c \
@@ -53,13 +53,10 @@ OBJS	=	$(addprefix $(PATHO), $(notdir $(patsubst %.c, %.o, $(sources))))
 LIBFT	=	./libft/libft.a
 
 HEADERS	=	./headers/builtins.h \
-			./headers/color.h \
-			./headers/error.h \
 			./headers/executor.h \
 			./headers/minishell.h \
 			./headers/parsing.h \
-			./headers/lexer.h \
-			./headers/utils.h
+			./headers/lexer.h
 
 READLINE_DIR = /System/Volumes/Data/Users/honguyen/.brew/Cellar/readline/8.2.10
 

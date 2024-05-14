@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_cd.c                                             :+:      :+:    :+:   */
+/*   b_cd.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:09 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:04:42 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	specific_path(t_data *data, char *str)
 	return (ret);
 }
 
-void	update_path_to_env(t_data *data)
+void	update_pathinenv(t_data *data)
 {
 	int		i;
 	char	*tmp;
@@ -73,7 +73,7 @@ void	update_path_to_env(t_data *data)
 	}
 }
 
-int	cd_helper(t_data *data, t_cmds *cmds)
+int	cd_helper(t_data *data, t_command *cmds)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -101,7 +101,7 @@ int	cd_helper(t_data *data, t_cmds *cmds)
 	return (ret);
 }
 
-int	m_cd(t_data *data, t_cmds *cmds)
+int	b_cd(t_data *data, t_command *cmds)
 {
 	int	ret;
 
@@ -113,7 +113,7 @@ int	m_cd(t_data *data, t_cmds *cmds)
 		ret = cd_helper(data, cmds);
 	if (ret != 0)
 		return (EXIT_FAILURE);
-	change_path(data);
-	update_path_to_env(data);
+	update_path(data);
+	update_pathinenv(data);
 	return (EXIT_SUCCESS);
 }

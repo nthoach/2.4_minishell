@@ -6,17 +6,17 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:02 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:21:09 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	(*builtin_arr(char *str))(t_data *data, t_cmds *cmds)
+int	(*builtin_fcn_name(char *str))(t_data *data, t_command *cmds)
 {
-	static void	*builtins[7][2] = {{"echo", m_echo}, {"cd", m_cd}, {"pwd",
-		m_pwd}, {"export", m_export}, {"unset", m_unset}, {"env", m_env},
-	{"exit", m_exit}};
+	static void	*builtins[7][2] = {{"echo", b_echo}, {"cd", b_cd}, {"pwd",
+		b_pwd}, {"export", b_export}, {"unset", b_unset}, {"env", b_env},
+	{"exit", b_exit}};
 	int			i;
 
 	i = 0;
@@ -30,7 +30,7 @@ int	(*builtin_arr(char *str))(t_data *data, t_cmds *cmds)
 	return (NULL);
 }
 
-int	p_specific_path(t_data *data, char *str)
+int	p_extract_path(t_data *data, char *str)
 {
 	char	*tmp;
 	int		ret;

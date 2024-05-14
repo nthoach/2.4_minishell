@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:13 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:10:34 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	display_error(int errorCode)
 {
-	ft_error(errorCode);
+	err_all(errorCode);
 	return (EXIT_FAILURE);
 }
 
@@ -31,7 +31,7 @@ int	create_heredoc(t_redir *heredoc, char *file_name)
 	}
 	line = readline(HEREDOC_MSG);
 	while (line && (ft_strcmp(heredoc->path, line)
-			&& g_status_code != STOP_HEREDOC))
+			&& g_status_code != HEREDOC_EXIT))
 	{
 		write(fd, line, ft_strlen(line));
 		write(fd, "\n", 1);
@@ -40,7 +40,7 @@ int	create_heredoc(t_redir *heredoc, char *file_name)
 	}
 	close(fd);
 	free(line);
-	if (g_status_code == STOP_HEREDOC)
+	if (g_status_code == HEREDOC_EXIT)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
@@ -70,7 +70,7 @@ char	*generate_heredoc_filename(void)
 	return (file_name);
 }
 
-int	send_heredoc(t_data *data, t_cmds *cmd)
+int	send_heredoc(t_data *data, t_command *cmd)
 {
 	t_redir	*redir;
 	int		sl;
@@ -81,10 +81,10 @@ int	send_heredoc(t_data *data, t_cmds *cmd)
 	{
 		if (redir->type == HEREDOC)
 		{
-			if (cmd->hd_file_name)
-				free(cmd->hd_file_name);
-			cmd->hd_file_name = generate_heredoc_filename();
-			sl = ft_heredoc(data, redir, cmd->hd_file_name);
+			if (cmd->filename_hd)
+				free(cmd->filename_hd);
+			cmd->filename_hd = generate_heredoc_filename();
+			sl = ft_heredoc(data, redir, cmd->filename_hd);
 			if (sl)
 				return (EXIT_FAILURE);
 		}

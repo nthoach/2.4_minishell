@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:34:11 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:29 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ int	valid_split(t_split *split)
 
 	ptr = split->first;
 	if (ptr && ptr->type == PIPE)
-		return (!parser_error(ptr));
+		return (!err_parser(ptr));
 	if (ptr && (split->last->type == PIPE || split->last->type == REDIR))
-		return (!ft_error(0));
+		return (!err_all(0));
 	while (ptr)
 	{
 		if (ptr->type == REDIR && (ptr->next && (ptr->next->type == REDIR
 					|| ptr->next->type == PIPE)))
-			return (!parser_error(ptr));
+			return (!err_parser(ptr));
 		if (ptr->type == PIPE && (ptr->next && ptr->next->type == PIPE))
-			return (!parser_error(ptr));
+			return (!err_parser(ptr));
 		ptr = ptr->next;
 	}
 	return (1);

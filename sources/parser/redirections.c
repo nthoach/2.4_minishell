@@ -6,14 +6,14 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:03 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:56 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
 // finds the last input redirection
-void	last_in_redir(t_cmds *cmd)
+void	last_in_redir(t_command *cmd)
 {
 	t_redir	*ptr;
 	t_redir	*last;
@@ -38,7 +38,7 @@ void	last_in_redir(t_cmds *cmd)
 }
 
 // finds the last output redirection
-void	last_out_redir(t_cmds *cmd)
+void	last_out_redir(t_command *cmd)
 {
 	t_redir	*ptr;
 	t_redir	*last;
@@ -76,7 +76,7 @@ void	sort_redir(t_word *ptr, t_redir *redir)
 }
 
 // adds redirection to list
-t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
+t_command	*push_redir(t_command *cmd, t_word *ptr)
 {
 	t_redir	*r;
 	t_redir	*redir;
@@ -84,7 +84,7 @@ t_cmds	*push_redir(t_cmds *cmd, t_word *ptr)
 	redir = (t_redir *)ft_calloc(1, sizeof(t_redir));
 	if (!redir)
 	{
-		ft_error(1);
+		err_all(1);
 		return (0);
 	}
 	if (ptr->next->type == PATH)

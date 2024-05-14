@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:10:16 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 17:17:49 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:03:08 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ int	check_redir_helper(int type, t_redir *dir)
 
 	if (type == OPEN)
 	{
-		if (handle_open(dir))
+		if (valid_byopenfile(dir))
 			return (EXIT_FAILURE);
 	}
 	else if (type == WRITE || type == APPEND)
 	{
-		if (handle_outfile(dir))
+		if (valid_outfile(dir))
 			return (EXIT_FAILURE);
 	}
 	else if (type == IGNORE)
@@ -62,7 +62,7 @@ int	check_redir_helper(int type, t_redir *dir)
 }
 
 /*Additional Function command not found is added in error_handling.c*/
-int	exec_error(char *str, int code)
+int	err_exec(char *str, int code)
 {
 	write(STDERR_FILENO, "minishell: ", 12);
 	write(STDERR_FILENO, str, ft_strlen(str));
@@ -81,7 +81,7 @@ int	exec_error(char *str, int code)
 	return (126);
 }
 
-int	loop_paths(t_data *data, t_cmds *cmd)
+int	exe_paths(t_data *data, t_command *cmd)
 {
 	int		i;
 	char	*mycmd;
@@ -95,7 +95,7 @@ int	loop_paths(t_data *data, t_cmds *cmd)
 			if (!access(mycmd, F_OK))
 			{
 				execve(mycmd, cmd->args, data->envp);
-				return (find_exec_error(mycmd, 1));
+				return (err_in_execve(mycmd, 1));
 			}
 			free(mycmd);
 			i++;

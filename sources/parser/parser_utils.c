@@ -6,13 +6,13 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:11:41 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:44 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-t_word	*init_cmd(t_word *start, t_cmds *new_cmd)
+t_word	*init_cmd(t_word *start, t_command *new_cmd)
 {
 	t_word	*ptr;
 
@@ -42,7 +42,7 @@ char	**init_args(t_word *start, char *command)
 	count = count_args(start, command);
 	args = (char **)ft_calloc(count + 2, sizeof(char *));
 	if (!args)
-		ft_error(1);
+		err_all(1);
 	count = 1;
 	if (!command)
 		count = 0;
@@ -56,11 +56,11 @@ char	**init_args(t_word *start, char *command)
 	return (args);
 }
 
-void	push_cmd(t_data *data, t_cmds *cmd)
+void	push_cmd(t_data *data, t_command *cmd)
 {
-	t_cmds	*ptr;
+	t_command	*ptr;
 
-	cmd->builtin = builtin_arr(cmd->command);
+	cmd->builtin = builtin_fcn_name(cmd->command);
 	last_in_redir(cmd);
 	last_out_redir(cmd);
 	ptr = data->cmds;
@@ -87,7 +87,7 @@ char	*ft_getenv(char *var, t_data *data)
 		value = ft_split(data->envp[i], '=');
 		if (!value)
 		{
-			ft_error(1);
+			err_all(1);
 			return (0);
 		}
 		if (!ft_strcmp(var, value[0]))

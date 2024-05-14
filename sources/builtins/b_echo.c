@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_echo.c                                           :+:      :+:    :+:   */
+/*   b_echo.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:18 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:04:44 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_lines(int i, char **str, int out)
 	}
 }
 
-int	m_echo(t_data *data, t_cmds *cmds)
+int	b_echo(t_data *data, t_command *cmds)
 {
 	int		i;
 	int		j;

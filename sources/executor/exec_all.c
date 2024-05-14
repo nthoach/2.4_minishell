@@ -6,13 +6,13 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:03 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 16:31:23 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:12:27 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	pipe_wait(int *pid, int amount)
+int	wait_pipe(int *pid, int amount)
 {
 	int	i;
 	int	status;
@@ -28,12 +28,12 @@ int	pipe_wait(int *pid, int amount)
 	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
 		exit_status = WEXITSTATUS(status);
-	if (g_status_code != STOP_HEREDOC)
+	if (g_status_code != HEREDOC_EXIT)
 		g_status_code = exit_status;
 	return (EXIT_SUCCESS);
 }
 
-int	ft_fork(t_data *data, int end[2], int fd_in, t_cmds *cmd)
+int	ft_fork(t_data *data, int end[2], int fd_in, t_command *cmd)
 {
 	static int	i = 0;
 
@@ -44,21 +44,21 @@ int	ft_fork(t_data *data, int end[2], int fd_in, t_cmds *cmd)
 	}
 	data->pid[i] = fork();
 	if (data->pid[i] < 0)
-		ft_error(5);
+		err_all(5);
 	if (data->pid[i] == 0)
 		dup_cmd(cmd, data, end, fd_in);
 	i++;
 	return (EXIT_SUCCESS);
 }
 
-int	check_fd_heredoc(t_data *data, int end[2], t_cmds *cmd)
+int	check_fd_heredoc(t_data *data, int end[2], t_command *cmd)
 {
 	int	fd_in;
 
 	if (data->heredoc)
 	{
 		close(end[0]);
-		fd_in = open(cmd->hd_file_name, O_RDONLY);
+		fd_in = open(cmd->filename_hd, O_RDONLY);
 	}
 	else
 		fd_in = end[0];
@@ -66,11 +66,11 @@ int	check_fd_heredoc(t_data *data, int end[2], t_cmds *cmd)
 }
 //  executing commands with pip
 
-int	executor(t_data *data)
+int	executor_pipe(t_data *data)
 {
-	int		end[2];
-	int		fd_in;
-	t_cmds	*curr_cmd;
+	int			end[2];
+	int			fd_in;
+	t_command	*curr_cmd;
 
 	fd_in = STDIN_FILENO;
 	curr_cmd = data->cmds;
@@ -78,7 +78,7 @@ int	executor(t_data *data)
 	{
 		if (curr_cmd->next)
 			if (pipe(end) < 0)
-				return (!ft_error(4));
+				return (!err_all(4));
 		send_heredoc(data, curr_cmd);
 		if (ft_fork(data, end, fd_in, curr_cmd) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
@@ -91,7 +91,7 @@ int	executor(t_data *data)
 		else
 			break ;
 	}
-	pipe_wait(data->pid, data->pipes);
+	wait_pipe(data->pid, data->pipes);
 	return (0);
 }
 
@@ -101,13 +101,13 @@ int	exec_all(t_data *data)
 	signal(SIGQUIT, sigquit_handler);
 	g_status_code = IN_CMD;
 	if (data->pipes == 0)
-		single_cmd(data->cmds, data);
+		nopipe_cmd(data->cmds, data);
 	else
 	{
 		data->pid = ft_calloc(data->pipes + 2, sizeof(int));
 		if (!data->pid)
-			return (ft_error(1));
-		if (executor(data))
+			return (err_all(1));
+		if (executor_pipe(data))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

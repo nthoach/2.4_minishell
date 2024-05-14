@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_env.c                                            :+:      :+:    :+:   */
+/*   b_env.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:27 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:04:45 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	m_env(t_data *data, t_cmds *cmds)
+int	b_env(t_data *data, t_command *cmds)
 {
 	int	i;
 
@@ -63,7 +63,7 @@ char	**sort_env(char **env)
 	sorted = (char **)ft_calloc(i + 1, sizeof(char *));
 	if (!sorted)
 	{
-		ft_error(1);
+		err_all(1);
 		return (0);
 	}
 	i = -1;
@@ -72,7 +72,7 @@ char	**sort_env(char **env)
 	return (bubble_sort(sorted, i));
 }
 
-void	sorted_env(t_data *data)
+void	do_sort_env(t_data *data)
 {
 	int		i;
 	char	**sorted;
@@ -83,11 +83,11 @@ void	sorted_env(t_data *data)
 	while (sorted && sorted[i])
 	{
 		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		temp = ft_substr(sorted[i], 0, equal_sign(sorted[i]));
+		temp = ft_substr(sorted[i], 0, is_equalsign(sorted[i]));
 		ft_putstr_fd(temp, STDOUT_FILENO);
 		free(temp);
 		ft_putstr_fd("\"", STDOUT_FILENO);
-		ft_putstr_fd(&sorted[i][equal_sign(sorted[i])], STDOUT_FILENO);
+		ft_putstr_fd(&sorted[i][is_equalsign(sorted[i])], STDOUT_FILENO);
 		ft_putendl_fd("\"", STDOUT_FILENO);
 		i++;
 	}

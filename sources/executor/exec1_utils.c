@@ -6,13 +6,13 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:09:45 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 17:09:47 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	find_cmd_helper(t_cmds *cmd)
+int	find_exe_cmd_helper(t_command *cmd)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -26,11 +26,11 @@ int	find_cmd_helper(t_cmds *cmd)
 	if (!access(tmp, F_OK))
 	{
 		free(tmp);
-		return (exec_error(cmd->command, 2));
+		return (err_exec(cmd->command, 2));
 	}
 	else
 	{
 		free(tmp);
-		return (exec_error(cmd->command, 1));
+		return (err_exec(cmd->command, 1));
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:55 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:10:52 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 17:49:27 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	sigint_handler(int sig)
 	}
 	else if (g_status_code == IN_HEREDOC)
 	{
-		g_status_code = STOP_HEREDOC;
+		g_status_code = HEREDOC_EXIT;
 		rl_replace_line("", 0);
 		rl_redisplay();
 		rl_done = 1;

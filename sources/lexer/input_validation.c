@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:52 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:00 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ static int	open_quotes(char *input)
 int	valid_input(char *input)
 {
 	if (open_quotes(input))
-		return (!ft_error(2));
+		return (!err_all(2));
 	if (invalid_char(input, ';'))
-		return (!invalid_token_error("';'"));
+		return (!err_token_invalid("';'"));
 	if (invalid_char(input, '&'))
-		return (!invalid_token_error("'&'"));
+		return (!err_token_invalid("'&'"));
 	if (invalid_char(input, '\\'))
-		return (!invalid_token_error("'\\'"));
+		return (!err_token_invalid("'\\'"));
 	return (1);
 }

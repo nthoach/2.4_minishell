@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:14 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:11:58 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:36:11 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	add_quote(t_split *split, char *input, int *i)
 	len = (*i) - start;
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
-		return (!ft_error(1));
+		return (!err_all(1));
 	len = -1;
 	while ((++len + start) < (*i))
 		str[len] = input[start + len];
@@ -93,7 +93,7 @@ static int	add_str(t_split *split, char *input, int *i)
 	len = str_len(i, input);
 	str = (char *)ft_calloc(len + 1, sizeof(char));
 	if (!str)
-		return (!ft_error(1));
+		return (!err_all(1));
 	k = -1;
 	while ((start + (++k)) < (*i))
 		str[k] = input[start + k];

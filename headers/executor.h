@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:56:51 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 16:57:04 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 19:03:08 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,34 +15,33 @@
 # include "parsing.h"
 # include "minishell.h"
 
-// check_redirections
-int				check_redirections(t_cmds *cmd);
-int				handle_outfile(t_redir *redir);
-int				handle_open(t_redir *redir);
+// redirections
+int				valid_redir(t_command *cmd);
+int				valid_outfile(t_redir *redir);
+int				valid_byopenfile(t_redir *redir);
 
 // executor
 int				exec_all(t_data *data);
-int				executor(t_data *data);
-int				pipe_wait(int *pid, int amount);
-int				exec_error(char *str, int code);
+int				executor_pipe(t_data *data);
+int				wait_pipe(int *pid, int amount);
+int				err_exec(char *str, int code);
 
-// handle_cmd
-int				find_cmd(t_cmds *cmd, t_data *data);
-void			handle_cmd(t_cmds *cmd, t_data *data);
-void			dup_cmd(t_cmds *cmd, t_data *data,
+// exe_cmd
+int				find_exe_cmd(t_command *cmd, t_data *data);
+void			check_exe_cmd(t_command *cmd, t_data *data);
+void			dup_cmd(t_command *cmd, t_data *data,
 					int end[2], int fd_in);
-void			single_cmd(t_cmds *cmd, t_data *data);
-int				loop_paths(t_data *data, t_cmds *cmd);
-int				find_exec_error(char *cmd, int code);
+void			nopipe_cmd(t_command *cmd, t_data *data);
+int				exe_paths(t_data *data, t_command *cmd);
+int				err_in_execve(char *cmd, int code);
 int				is_directory(char *path);
 
 // heredoc
-int				send_heredoc(t_data *data, t_cmds *cmd);
+int				send_heredoc(t_data *data, t_command *cmd);
 
-//executor_data
 int				check_redir_helper(int type, t_redir *dir);
 
 //exec_data
-int				find_cmd_helper(t_cmds *cmd);
+int				find_exe_cmd_helper(t_command *cmd);
 
 #endif

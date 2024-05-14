@@ -6,13 +6,13 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:05 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:13:24 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-void	p_export(t_data *data, t_cmds *cmds)
+void	p_export(t_data *data, t_command *cmds)
 {
 	char	**tmp;
 	int		i;
@@ -24,15 +24,15 @@ void	p_export(t_data *data, t_cmds *cmds)
 	{
 		while (cmds->args[i])
 		{
-			if (!check_parameter(cmds->args[i]) && !variable_exist(data,
-					cmds->args[i]) && !invalid_identifier(cmds->args[i], 1))
+			if (!validate_symbol(cmds->args[i]) && !is_envvar_exist(data,
+					cmds->args[i]) && !invalid_symbols(cmds->args[i], 1))
 			{
 				tmp = add_var(data->envp, cmds->args[i]);
 				free_double_ptr((void **)data->envp);
 				data->envp = tmp;
 			}
-			else if ((invalid_identifier(cmds->args[i], 1)
-					|| check_parameter(cmds->args[i])))
+			else if ((invalid_symbols(cmds->args[i], 1)
+					|| validate_symbol(cmds->args[i])))
 				return ;
 			i++;
 		}
@@ -40,7 +40,7 @@ void	p_export(t_data *data, t_cmds *cmds)
 	return ;
 }
 
-void	p_exit(t_data *data, t_cmds *cmds)
+void	p_exit(t_data *data, t_command *cmds)
 {
 	int	exit_code;
 
@@ -59,19 +59,19 @@ void	p_exit(t_data *data, t_cmds *cmds)
 	exit(exit_code);
 }
 
-void	p_unset(t_data *data, t_cmds *cmds)
+void	p_unset(t_data *data, t_command *cmds)
 {
 	char	**temp;
 
-	if (!cmds->args[1] || invalid_identifier(cmds->args[1], 0)
-		|| equal_sign(cmds->args[1]) != 0)
+	if (!cmds->args[1] || invalid_symbols(cmds->args[1], 0)
+		|| is_equalsign(cmds->args[1]) != 0)
 		return ;
-	temp = del_var(data->envp, cmds->args[1]);
+	temp = del_env_var(data->envp, cmds->args[1]);
 	free_double_ptr((void **)data->envp);
 	data->envp = temp;
 }
 
-void	p_cd(t_data *data, t_cmds *cmds)
+void	p_cd(t_data *data, t_command *cmds)
 {
 	int		ret;
 	char	*tmp;
@@ -79,9 +79,9 @@ void	p_cd(t_data *data, t_cmds *cmds)
 	char	*tmp2;
 
 	if (!cmds->args[1])
-		ret = p_specific_path(data, "HOME=");
+		ret = p_extract_path(data, "HOME=");
 	else if (ft_strncmp(cmds->args[1], "-", 1) == 0)
-		ret = p_specific_path(data, "OLDPWD=");
+		ret = p_extract_path(data, "OLDPWD=");
 	else if (cmds->args[1][0] == '~')
 	{
 		tmp = find_path_ret("HOME=", data);
@@ -96,18 +96,18 @@ void	p_cd(t_data *data, t_cmds *cmds)
 		ret = chdir(cmds->args[1]);
 	if (ret != 0)
 		return ;
-	change_path(data);
-	update_path_to_env(data);
+	update_path(data);
+	update_pathinenv(data);
 }
 
-void	p_builtins(t_data *data, t_cmds *cmd)
+void	p_builtins(t_data *data, t_command *cmd)
 {
-	if (cmd->builtin == m_export)
+	if (cmd->builtin == b_export)
 		p_export(data, cmd);
-	if (cmd->builtin == m_cd)
+	if (cmd->builtin == b_cd)
 		p_cd(data, cmd);
-	if (cmd->builtin == m_exit)
+	if (cmd->builtin == b_exit)
 		p_exit(data, cmd);
-	if (cmd->builtin == m_unset)
+	if (cmd->builtin == b_unset)
 		p_unset(data, cmd);
 }

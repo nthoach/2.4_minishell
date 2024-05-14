@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:04:11 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/13 17:10:37 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:00:00 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	ini1_data(t_data *data, char **envp)
 	data->envp = 0;
 	data->reset = false;
 	if (*envp != 0)
-		data->envp = ft_arrdup(envp);
+		data->envp = dup_arr(envp);
 	find_pwd(data);
 }

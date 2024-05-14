@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   m_pwd.c                                            :+:      :+:    :+:   */
+/*   b_pwd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:31:49 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:04:49 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/minishell.h"
 
-int	m_pwd(t_data *data, t_cmds *cmds)
+int	b_pwd(t_data *data, t_command *cmds)
 {
 	(void)cmds;
 	if (data->pwd)
@@ -22,7 +22,7 @@ int	m_pwd(t_data *data, t_cmds *cmds)
 	return (EXIT_SUCCESS);
 }
 
-int	error_invalid_identifier(char *identifier)
+int	error_invalid_symbols(char *identifier)
 {
 	ft_putstr_fd("minishell: export: `", STDERR_FILENO);
 	ft_putstr_fd(identifier, STDERR_FILENO);

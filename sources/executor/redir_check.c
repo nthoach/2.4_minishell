@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:22 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:09:17 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/13 18:54:26 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	handle_infile(char *file)
 }
 
 // handles opening and creating file without writing
-int	handle_open(t_redir *redir)
+int	valid_byopenfile(t_redir *redir)
 {
 	int	fd;
 
@@ -62,7 +62,7 @@ int	handle_open(t_redir *redir)
 	return (EXIT_SUCCESS);
 }
 
-int	handle_outfile(t_redir *redir)
+int	valid_outfile(t_redir *redir)
 {
 	int	fd;
 
@@ -82,7 +82,7 @@ int	handle_outfile(t_redir *redir)
 	return (EXIT_SUCCESS);
 }
 
-int	check_redirections(t_cmds *cmd)
+int	valid_redir(t_command *cmd)
 {
 	t_redir	*redir;
 
@@ -95,7 +95,7 @@ int	check_redirections(t_cmds *cmd)
 				return (EXIT_FAILURE);
 		}
 		else if (redir->type == HEREDOC)
-			if (handle_infile(cmd->hd_file_name))
+			if (handle_infile(cmd->filename_hd))
 				return (EXIT_FAILURE);
 		if (check_redir_helper(redir->type, redir) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
