@@ -34,13 +34,13 @@ sources	=	sources/minishell.c \
 		sources/exec/exec1_utils.c \
 		sources/exec/heredoc.c \
 		sources/exec/exec2_utils.c \
-		sources/lex/input_validation.c \
+		sources/lex/input_valid.c \
 		sources/lex/lex.c \
 		sources/lex/lex_utils.c \
 		sources/lex/valid_split.c \
 		sources/lex/symbol_utils.c \
 		sources/lex/expand_env.c \
-		sources/lex/exp_define_quote.c \
+		sources/lex/handle_quote.c \
 		sources/parse/parse_all.c \
 		sources/parse/parse_help.c \
 		sources/parse/redirec.c \
@@ -118,6 +118,16 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f $(LIBFT)
+
+run: re clean
+	@make re
+	@make clean
+	@./$(NAME)
+
+leaks: re clean
+	@make re
+	@make clean
+	@valgrind --suppressions=valgrind_readline_leaks_ignore.txt --leak-check=full --trace-children=yes --show-leak-kinds=all --track-origins=yes --track-fds=yes ./$(NAME)
 
 re: fclean all
 
