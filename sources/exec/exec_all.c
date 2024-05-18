@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:33:03 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/18 16:55:51 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ int	wait_pipe(int *pid, int amount)
 
 	i = 0;
 	status = 0;
-	while (i < amount)
+	while (i <= amount)
 	{
 		waitpid(pid[i], &status, 0);
 		i++;
 	}
-	waitpid(pid[i], &status, 0);
 	if (WIFEXITED(status))
 		exit_status = WEXITSTATUS(status);
 	if (g_status_code != HEREDOC_EXIT)
@@ -64,9 +63,9 @@ int	check_fd_heredoc(t_data *data, int end[2], t_command *cmd)
 		fd_in = end[0];
 	return (fd_in);
 }
-//  executing commands with pip
 
-int	executor_pipe(t_data *data)
+//  executing commands with pipe
+int	pipe_cmd(t_data *data)
 {
 	int			end[2];
 	int			fd_in;
@@ -107,7 +106,7 @@ int	exec_all(t_data *data)
 		data->pid = ft_calloc(data->pipes + 2, sizeof(int));
 		if (!data->pid)
 			return (err_all(1));
-		if (executor_pipe(data))
+		if (pipe_cmd(data))
 			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);

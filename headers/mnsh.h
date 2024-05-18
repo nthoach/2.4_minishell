@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 16:57:25 by honguyen          #+#    #+#             */
-/*   Updated: 2024/05/14 20:03:05 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/18 13:11:49 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	**dup_arr(char **arr);
 void	free1_data(t_data *data);
 void	ini1_data(t_data *data, char **envp);
 
-int		parse_envp(t_data *data);
 int		find_pwd(t_data *data);
 int		free2_data(t_data *data);
 int		event(void);

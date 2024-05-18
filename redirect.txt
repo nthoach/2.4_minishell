@@ -1,0 +1,11 @@
+Makefile
+README.md
+headers
+hi
+hi.txt
+libft
+minishell
+minishell_tester
+redirect.txt
+sources
+valgrind_readline_leaks_ignore.txt

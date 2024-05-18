@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:45 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/14 20:12:36 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/18 15:59:48 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	minishell_loop(t_data *data)
 {
-	printf("\n%s\n\n", WELCOME_MSG);
+	ft_printf("\n%s\n\n", WELCOME_MSG);
 	while (1)
 	{
 		data->input = readline(READLINE_MSG);
@@ -23,7 +23,7 @@ void	minishell_loop(t_data *data)
 		{
 			free2_data(data);
 			free1_data(data);
-			printf("exit\n");
+			ft_printf("exit\n");
 			exit(EXIT_SUCCESS);
 		}
 		else if (data->input[0] == '\0')
@@ -45,7 +45,7 @@ int	main(int argc, char **argv, char **envp)
 
 	if (argc != 1 || argv[1])
 	{
-		printf("just run:'./minishell' !! No argument needed !!\n");
+		ft_printf("just run:'./minishell' !! No argument needed !!\n");
 		exit(0);
 	}
 	ini1_data(&data, envp);

@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 15:45:34 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/13 17:12:45 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:12:23 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,22 +39,3 @@ int	ft_atoi(const char *str)
 	}
 	return (value);
 }
-
-// int main()
-// {
-// 	char a[] = "	  +++--+-76543ffssf654";
-//     printf("%d\n", ft_atoi(a));
-//     printf("%d\n", atoi(a));
-//      char b[] = "+++--+-76543ffssf654";
-//     printf("%d\n", ft_atoi(b));
-//     printf("%d\n", atoi(b));
-//      char c[] = "     +76543ffssf654";
-//     printf("%d\n", ft_atoi(c));
-//     printf("%d\n", atoi(c));
-//      char d[] = "2147483649";
-//     printf("%d\n", ft_atoi(d));
-//     printf("%d\n", atoi(d));
-//          char e[] = "2147483649";
-//     printf("%d\n", ft_atoi(e));
-//     printf("%d\n", atoi(e));
-// }

@@ -24,7 +24,7 @@
 	and for positive number only
 	(7) precision < len -> ignore precison, print whole len
 	(8) prescision = 0 && di = 0, no print
-	(9) if having "w.p" (having precision), ignore flag "0"
+	(9) if having "w.p" (having precision), ignore  "0"
 	(10) "+"" will disable " ", and "-" will disable "0"
 	exmaples:
 	left_justified with "-":

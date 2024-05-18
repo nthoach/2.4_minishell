@@ -21,7 +21,7 @@ int				valid_byopenfile(t_redir *redir);
 
 // executor
 int				exec_all(t_data *data);
-int				executor_pipe(t_data *data);
+int				pipe_cmd(t_data *data);
 int				wait_pipe(int *pid, int amount);
 int				err_exec(char *str, int code);
 
