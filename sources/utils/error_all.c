@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:32:22 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/18 11:27:14 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	err_all(int error)
 	return (EXIT_FAILURE);
 }
 
+//edited
 int	err_parser(t_word *ptr)
 {
 	if (ptr->type == PIPE)
@@ -51,7 +52,7 @@ int	err_parser(t_word *ptr)
 	}
 	else if (ptr->type == REDIR && ft_strlen(ptr->cont) == 2)
 	{
-		if (ptr->cont[0] == '>')
+		if (ptr->cont[0] == '>' && ptr->cont[1] != '|')
 			err_token(0, ERR_GG);
 		else if (ptr->cont[0] == '<')
 			err_token(0, ERR_LL);

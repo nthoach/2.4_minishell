@@ -6,7 +6,7 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:03 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/18 11:26:17 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	sort_redir(t_word *ptr, t_redir *redir)
 {
 	if (ptr->cont[0] == '<' && !ptr->cont[1])
 		redir->type = INPUT;
-	else if (ptr->cont[0] == '>' && !ptr->cont[1])
+	else if (ptr->cont[0] == '>' && (!ptr->cont[1] || ptr->cont[1] == '|'))
 		redir->type = WRITE;
 	else if (ptr->cont[0] == '<' && ptr->cont[1] == '<')
 		redir->type = HEREDOC;

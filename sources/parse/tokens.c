@@ -6,13 +6,13 @@
 /*   By: honguyen <honguyen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 21:35:14 by nthoach           #+#    #+#             */
-/*   Updated: 2024/05/14 19:49:40 by honguyen         ###   ########.fr       */
+/*   Updated: 2024/05/18 11:26:40 by honguyen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../headers/mnsh.h"
 
-// adds redirection to list
+// adds redirection to list, edited '>|'
 static int	add_redir(t_split *split, char *input, int *i)
 {
 	int	success;
@@ -23,6 +23,11 @@ static int	add_redir(t_split *split, char *input, int *i)
 			success = push_word(split, ">>", REDIR);
 		else
 			success = push_word(split, "<<", REDIR);
+		(*i) = (*i) + 2;
+	}
+	else if (input[(*i)] == '>' && input[(*i) + 1] == '|')
+	{
+		success = push_word(split, ">|", REDIR);
 		(*i) = (*i) + 2;
 	}
 	else

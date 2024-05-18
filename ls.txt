@@ -1,0 +1,10 @@
+Makefile
+README.md
+check_leaks.sh
+headers
+libft
+ls.txt
+minishell
+minishell_tester
+sources
+valgrind_readline_leaks_ignore.txt
